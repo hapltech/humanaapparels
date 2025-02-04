@@ -74,3 +74,23 @@ class AutoCleanupImageField(AutoCleanupFieldMixin, ImageField):
     """
 
     pass
+
+
+class OptimizedImageField(AutoCleanupImageField):
+    def __init__(self, *args, format=None, quality=None, max_dimensions=None, **kwargs):
+        self.image_format = format
+        self.image_quality = quality
+        self.max_dimensions = max_dimensions
+        super().__init__(*args, **kwargs)
+
+    def pre_save(self, model_instance, add):
+        file = getattr(model_instance, self.attname)
+        if file and not file._committed:
+            optimized = ImageOptimizer.optimize_image(
+                file,
+                format=self.image_format,
+                quality=self.image_quality,
+                max_dimensions=self.max_dimensions,
+            )
+            setattr(model_instance, self.attname, optimized)
+        return super().pre_save(model_instance, add)
