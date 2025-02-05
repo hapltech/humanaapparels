@@ -1,4 +1,4 @@
-const plugin = require("@tailwindcss/forms");
+import defaultTheme from "tailwindcss/defaultTheme";
 
 module.exports = {
     darkMode: "class",
@@ -9,5 +9,18 @@ module.exports = {
         "./common/**/*.{html,js}",
         "./users/**/*.{html,js}",
     ],
+    theme: {
+        extend: {
+            colors: {
+                foreground: "hsl(var(--foreground))",
+                background: "hsl(var(--background))",
+                card: "hsl(var(--card))",
+                border: "hsl(var(--border))",
+                primary: "hsl(var(--primary))",
+                accent: "hsl(var(--accent))",
+            },
+        },
+    },
+    darkMode: "class",
     plugins: [require("@tailwindcss/forms"), require("preline/plugin")],
 };
