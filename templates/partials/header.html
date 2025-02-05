@@ -1,12 +1,12 @@
 {% load static %}
 <header class="sticky top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-card/90 backdrop-blur backdrop-filter shadow-sm">
-  <nav class="relative max-w-[66rem] w-full md:flex md:items-center md:justify-between md:gap-3 mx-auto px-4 sm:px-6 lg:px-8 py-2">
+  <nav class="relative max-w-7xl w-full md:flex md:items-center md:justify-between md:gap-3 mx-auto px-4 sm:px-6 lg:px-8 py-2">
     <!-- Logo w/ Collapse Button -->
     <div class="flex items-center justify-between">
       <a class="flex-none font-semibold text-xl focus:outline-none focus:opacity-80"
          href="{% url 'home' %}"
          aria-label="Humana Apparels Pvt. Ltd.">
-        <img class="h-16"
+        <img class="h-12"
              src="{% static 'images/humana_logo.png' %}"
              alt="Humana Apparels Pvt. Ltd.">
       </a>
@@ -34,35 +34,35 @@
          class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block"
          aria-labelledby="hs-base-header-collapse">
       <div class="overflow-hidden overflow-y-auto max-h-[calc(100dvh)]">
-        <div class="md:py-0 flex flex-col md:flex-row md:items-center md:justify-end gap-0.5 md:gap-1 text-lg font-medium py-4">
+        <div class="md:py-0 flex flex-col md:flex-row md:items-center md:justify-end gap-0.5 md:gap-1 font-medium py-4 text-foreground/80">
           <!-- Home -->
-          <a class="p-2 flex items-center text-sm/80 hover:text-primary"
+          <a class="p-2 flex items-center hover:text-primary"
              href="{% url 'home' %}">
             <i class="ph ph-duotone ph-house-line me-3 md:me-2 block md:hidden"></i>
             Home
           </a>
           <!-- About -->
-          <a class="p-2 flex items-center text-sm/80 hover:text-primary" href="#">
+          <a class="p-2 flex items-center hover:text-primary" href="#">
             <i class="ph ph-duotone ph-info me-3 md:me-2 block md:hidden"></i>
             About
           </a>
           <!-- Clients -->
-          <a class="p-2 flex items-center text-sm/80 hover:text-primary" href="#">
+          <a class="p-2 flex items-center hover:text-primary" href="#">
             <i class="ph ph-duotone ph-users-three me-3 md:me-2 block md:hidden"></i>
             Our Customers
           </a>
           <!-- Career -->
-          <a class="p-2 flex items-center text-sm/80 hover:text-primary" href="#">
+          <a class="p-2 flex items-center hover:text-primary" href="#">
             <i class="ph ph-duotone ph-briefcase me-3 md:me-2 block md:hidden"></i>
             Career
           </a>
           <!-- Contact -->
-          <a class="p-2 flex items-center text-sm/80 hover:text-primary" href="#">
+          <a class="p-2 flex items-center hover:text-primary" href="#">
             <i class="ph ph-duotone ph-phone me-3 md:me-2 block md:hidden"></i>
             Contact
           </a>
           <!-- News/Blog -->
-          <a class="p-2 flex items-center text-sm/80 hover:text-primary" href="#">
+          <a class="p-2 flex items-center hover:text-primary" href="#">
             <i class="ph ph-duotone ph-newspaper me-3 md:me-2 block md:hidden"></i>
             News
           </a>
