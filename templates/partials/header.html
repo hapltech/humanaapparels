@@ -1,6 +1,6 @@
 {% load static %}
 <header id="main-header"
-        class="sticky top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-background/90 backdrop-blur backdrop-filter py-1 mb-4 transition-all duration-300">
+        class="sticky top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-background/90 backdrop-blur py-1">
   <nav class="relative max-w-7xl w-full md:flex md:items-center md:justify-between md:gap-3 mx-auto px-4 sm:px-6 lg:px-8 py-2">
     <!-- Logo w/ Collapse Button -->
     <div class="flex items-center justify-between">
@@ -73,17 +73,3 @@
     <!-- End Collapse -->
   </nav>
 </header>
-<script>
-  document.addEventListener('scroll', () => {
-    const header = document.getElementById('main-header');
-    if (window.scrollY > 10) {
-      header.classList.add('shadow-sm');
-      header.classList.remove('bg-background/90');
-      header.classList.add('bg-card/90');
-    } else {
-      header.classList.remove('shadow-sm');
-      header.classList.remove('bg-card/90');
-      header.classList.add('bg-background/90');
-    }
-  });
-</script>
