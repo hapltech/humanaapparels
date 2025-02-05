@@ -11,18 +11,16 @@
              src="{% static 'images/humana_logo.png' %}"
              alt="Humana Apparels Pvt. Ltd.">
       </a>
-      <!-- Collapse Button -->
-      <div class="md:hidden">
+      <!-- Collapse Button & Theme Switch (Mobile) -->
+      <div class="flex items-center md:hidden">
+        {% include "partials/theme_switch.html" %}
+        <div class="w-px h-6 bg-border/50 mr-3 ml-1"></div>
+        <!-- Collapse Button -->
         <button type="button"
                 class="hs-collapse-toggle relative size-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-border/30 hover:bg-card/10 focus:outline-none focus:bg-card/10 disabled:opacity-50 disabled:pointer-events-none"
                 id="hs-base-header-collapse"
-                aria-expanded="false"
-                aria-controls="hs-base-header"
-                aria-label="Toggle navigation"
                 data-hs-collapse="#hs-base-header">
-          <!-- Menu Icon -->
           <i class="ph ph-bold ph-list text-xl hs-collapse-open:hidden text-primary"></i>
-          <!-- Close Icon -->
           <i class="ph ph-bold ph-x text-xl hidden hs-collapse-open:block text-red-500"></i>
           <span class="sr-only">Toggle navigation</span>
         </button>
@@ -50,12 +48,7 @@
           <!-- Clients -->
           <a class="p-2 flex items-center hover:text-primary" href="#">
             <i class="ph ph-duotone ph-users-three me-3 md:me-2 block md:hidden"></i>
-            Our Customers
-          </a>
-          <!-- Career -->
-          <a class="p-2 flex items-center hover:text-primary" href="#">
-            <i class="ph ph-duotone ph-briefcase me-3 md:me-2 block md:hidden"></i>
-            Career
+            Customers
           </a>
           <!-- Contact -->
           <a class="p-2 flex items-center hover:text-primary" href="#">
@@ -67,6 +60,21 @@
             <i class="ph ph-duotone ph-newspaper me-3 md:me-2 block md:hidden"></i>
             News
           </a>
+          <!-- Divider & Theme Switch (Desktop) -->
+          <div class="flex items-center">
+            <div class="hidden md:block w-px h-6 bg-border/50 mx-4"></div>
+            <!-- Career -->
+            <a class="p-2 flex items-center hover:text-primary md:px-3 md:py-0.5 md:rounded-lg md:bg-primary md:text-accent md:hover:text-accent md:hover:bg-primary/90"
+               href="#">
+              <i class="ph ph-duotone ph-briefcase me-3 md:me-2 block md:hidden"></i>
+              Career
+            </a>
+          </div>
+          <!-- Divider & Theme Switch (Desktop) -->
+          <div class="hidden md:flex md:items-center">
+            <div class="w-px h-6 bg-border/50 mx-4"></div>
+            {% include "partials/theme_switch.html" %}
+          </div>
         </div>
       </div>
     </div>
