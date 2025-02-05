@@ -6,15 +6,8 @@
   <meta name="description" content="Home of Humana Apparels Pvt. Ltd.">
 {% endblock meta_description %}
 {% block content %}
-  <!-- Hero or carousel section -->
+  <!-- Hero Carousel -->
+  {% include "partials/hero_carousel.html" %}
   <!-- Overview / 'At a glance' -->
   <!-- Featured Clients / Testimonials -->
-  {% for i in  "123567890" %}
-    <div>
-      <div class="container mx-auto">
-        <h1 class="text-4xl font-bold text-center">Welcome to Humana Apparels</h1>
-        <p class="text-lg text-center mt-4">We are a leading manufacturer of high-quality garments.</p>
-      </div>
-    </div>
-  {% endfor %}
 {% endblock content %}
