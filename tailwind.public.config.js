@@ -22,5 +22,9 @@ module.exports = {
         },
     },
     darkMode: "class",
-    plugins: [require("@tailwindcss/forms"), require("preline/plugin")],
+    plugins: [
+        require("@tailwindcss/forms"),
+        require("tailwindcss-motion"),
+        require("preline/plugin"),
+    ],
 };
