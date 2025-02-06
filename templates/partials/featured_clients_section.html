@@ -11,13 +11,13 @@
       <!-- Client Rows -->
       <div class="flex flex-col items-center gap-12">
         <!-- First Row (6 items) -->
-        <div class="flex justify-center gap-12 lg:gap-16">
+        <div class="flex flex-wrap sm:flex-nowrap justify-center gap-12 lg:gap-16">
           {% for client in clients|slice:":6" %}
             {% include "partials/client_logo.html" %}
           {% endfor %}
         </div>
         <!-- Second Row (4 items) -->
-        <div class="flex justify-center gap-12 lg:gap-16">
+        <div class="flex flex-wrap sm:flex-nowrap justify-center gap-12 lg:gap-16">
           {% for client in clients|slice:"6:10" %}
             {% include "partials/client_logo.html" %}
           {% endfor %}
