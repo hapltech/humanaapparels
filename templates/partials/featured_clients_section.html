@@ -1,0 +1,31 @@
+<div class="relative overflow-hidden pt-4">
+  <!-- Background Pattern -->
+  {% include "partials/wave_pattern_background.html" %}
+  <div class="relative z-10">
+    <div class="max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <!-- Title -->
+      <div class="max-w-2xl mx-auto text-center mb-10">
+        <h2 class="text-3xl font-bold md:text-4xl md:leading-tight text-foreground">Trusted by Leading Fashion Brands</h2>
+        <p class="mt-4 text-lg text-foreground/60">Partnering with global brands to deliver sustainable fashion solutions</p>
+      </div>
+      <!-- Client Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8">
+        {% for client in clients %}
+          <a href="{{ client.url }}" class="group">
+            <img src="{{ client.logo }}"
+                 alt="{{ client.name }}"
+                 class="h-20 aspect-[3/2] overflow-hidden rounded-xl object-cover mx-auto transition duration-300 grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100">
+          </a>
+        {% endfor %}
+      </div>
+      <!-- CTA -->
+      <div class="mt-10 text-center">
+        <a class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-foreground bg-card hover:bg-card/90 rounded-full border border-border transition"
+           href="#">
+          View Success Stories
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

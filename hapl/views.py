@@ -52,8 +52,62 @@ def index(request):
             },
         },
     ]
+
+    clients = [
+        {
+            "name": "Fashion Brand 1",
+            "logo": "https://picsum.photos/240/80?random=1",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 2",
+            "logo": "https://picsum.photos/240/80?random=2",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 3",
+            "logo": "https://picsum.photos/240/80?random=3",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 4",
+            "logo": "https://picsum.photos/240/80?random=4",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 5",
+            "logo": "https://picsum.photos/240/80?random=5",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 6",
+            "logo": "https://picsum.photos/240/80?random=6",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 6",
+            "logo": "https://picsum.photos/240/80?random=6",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 6",
+            "logo": "https://picsum.photos/240/80?random=6",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 6",
+            "logo": "https://picsum.photos/240/80?random=6",
+            "url": "#",
+        },
+        {
+            "name": "Fashion Brand 6",
+            "logo": "https://picsum.photos/240/80?random=6",
+            "url": "#",
+        },
+    ]
+
     return render(
         request,
         "www/home/index.html",
-        {"hero_slides": hero_slides, "articles": articles},
+        {"hero_slides": hero_slides, "articles": articles, "clients": clients},
     )
