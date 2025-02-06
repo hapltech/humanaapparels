@@ -1,0 +1,18 @@
+<a class="group flex flex-col h-full border border-border hover:border-transparent hover:shadow-lg transition duration-300 rounded-xl p-5 bg-card"
+   href="{{ article.url }}">
+  <div class="aspect-w-16 aspect-h-11">
+    <img class="w-full object-cover rounded-xl"
+         src="{{ article.image }}"
+         alt="{{ article.title }}">
+  </div>
+  <div class="my-6">
+    <h3 class="text-xl font-semibold text-foreground group-hover:text-primary">{{ article.title }}</h3>
+    <p class="mt-5 text-foreground/60">{{ article.excerpt }}</p>
+  </div>
+  <div class="mt-auto flex items-center gap-x-3">
+    <img class="size-8 rounded-full"
+         src="{{ article.author.avatar }}"
+         alt="{{ article.author.name }}">
+    <h5 class="text-sm text-foreground/80">By {{ article.author.name }}</h5>
+  </div>
+</a>
