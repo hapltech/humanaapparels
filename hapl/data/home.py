@@ -103,8 +103,8 @@ FEATURED_CLIENTS = [
 ]
 
 COMPANY_STATS = [
-    {"value": "25+", "label": "Years Experience"},
-    {"value": "500+", "label": "Employees"},
-    {"value": "50M+", "label": "Units Produced"},
-    {"value": "20+", "label": "Countries Served"},
+    {"value": "25+", "label": "Years Experience", "icon": "ph-calendar"},
+    {"value": "500+", "label": "Employees", "icon": "ph-users"},
+    {"value": "50M+", "label": "Units Produced", "icon": "ph-t-shirt"},
+    {"value": "20+", "label": "Countries Served", "icon": "ph-globe"},
 ]
