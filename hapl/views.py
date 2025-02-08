@@ -12,7 +12,7 @@ from hapl.data.home import (
 def index(request):
     return render(
         request,
-        "www/home/index.html",
+        "www/home.html",
         {
             "hero_slides": HERO_CAROUSEL_SLIDES,
             "articles": FEATURED_ARTICLES,

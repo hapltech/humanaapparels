@@ -110,9 +110,9 @@ COMPANY_STATS = [
 ]
 
 INTRODUCTION_DATA = {
-    "image": "https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?w=1920&h=800&q=80",
+    "image": "https://picsum.photos/1920/1080?random=5",
     "title": "Crafting Excellence in Apparel Manufacturing",
-    "description": "We combine traditional craftsmanship with modern technology to deliver exceptional quality garments that meet global standards.",
+    "description": "We combine traditional craftsmanship with modern technology that meet global standards.",
     "features": [
         {
             "icon": "ph-duotone ph-users",
