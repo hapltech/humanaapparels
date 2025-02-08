@@ -108,3 +108,29 @@ COMPANY_STATS = [
     {"value": "50M+", "label": "Units Produced", "icon": "ph-t-shirt"},
     {"value": "20+", "label": "Countries Served", "icon": "ph-globe"},
 ]
+
+# ...existing code...
+
+SERVICES = [
+    {
+        "id": "design-development",
+        "icon": "ph-pen-nib",
+        "title": "Design & Development",
+        "description": "Our expert team brings your designs to life with precision and creativity.",
+        "image": "https://picsum.photos/560/720?random=1",
+    },
+    {
+        "id": "manufacturing",
+        "icon": "ph-factory",
+        "title": "Manufacturing Excellence",
+        "description": "State-of-the-art facilities and skilled craftspeople ensuring quality in every garment.",
+        "image": "https://picsum.photos/560/720?random=2",
+    },
+    {
+        "id": "sustainability",
+        "icon": "ph-leaf",
+        "title": "Sustainable Production",
+        "description": "Eco-friendly practices and materials for a greener future in fashion manufacturing.",
+        "image": "https://picsum.photos/560/720?random=3",
+    },
+]

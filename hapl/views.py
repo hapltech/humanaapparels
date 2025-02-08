@@ -4,6 +4,7 @@ from hapl.data.home import (
     FEATURED_ARTICLES,
     FEATURED_CLIENTS,
     COMPANY_STATS,
+    SERVICES,
 )
 
 
@@ -16,5 +17,6 @@ def index(request):
             "articles": FEATURED_ARTICLES,
             "clients": FEATURED_CLIENTS,
             "stats": COMPANY_STATS,
+            "services": SERVICES,
         },
     )
