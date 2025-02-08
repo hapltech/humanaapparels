@@ -1,13 +1,13 @@
 {% load static %}
 <header id="main-header"
-        class="sticky top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-background/90 backdrop-blur py-1">
+        class="sticky top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-background/80 backdrop-blur-sm py-1">
   <nav class="relative max-w-7xl w-full md:flex md:items-center md:justify-between md:gap-3 mx-auto px-4 sm:px-6 lg:px-8 py-2">
     <!-- Logo w/ Collapse Button -->
     <div class="flex items-center justify-between">
       <a class="flex-none font-semibold text-xl focus:outline-none focus:opacity-80"
          href="{% url 'home' %}"
          aria-label="Humana Apparels Pvt. Ltd.">
-        <img class="h-12"
+        <img class="h-12 dark:brightness-200"
              src="{% static 'images/humana_logo.png' %}"
              alt="Humana Apparels Pvt. Ltd.">
       </a>

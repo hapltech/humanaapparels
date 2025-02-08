@@ -109,7 +109,33 @@ COMPANY_STATS = [
     {"value": "20+", "label": "Countries Served", "icon": "ph-globe"},
 ]
 
-# ...existing code...
+INTRODUCTION_DATA = {
+    "image": "https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?w=1920&h=800&q=80",
+    "title": "Crafting Excellence in Apparel Manufacturing",
+    "description": "We combine traditional craftsmanship with modern technology to deliver exceptional quality garments that meet global standards.",
+    "features": [
+        {
+            "icon": "ph-duotone ph-users",
+            "title": "Expert Craftspeople",
+            "description": "Our skilled team brings decades of experience and passion to every garment we produce.",
+        },
+        {
+            "icon": "ph-duotone ph-chart-line-up",
+            "title": "Modern Technology",
+            "description": "State-of-the-art machinery and processes ensure consistent quality and efficiency.",
+        },
+        {
+            "icon": "ph-duotone ph-leaf",
+            "title": "Sustainable Practices",
+            "description": "Committed to eco-friendly manufacturing processes and responsible sourcing.",
+        },
+        {
+            "icon": "ph-duotone ph-certificate",
+            "title": "Quality Assurance",
+            "description": "Rigorous quality control measures at every stage of production.",
+        },
+    ],
+}
 
 SERVICES = [
     {
