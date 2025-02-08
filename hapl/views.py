@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from hapl.data.about import ABOUT_DATA, TEAM_DATA
+from hapl.data.about import ABOUT_DATA, TEAM_DATA, FAQ_DATA
 from hapl.data.home import (
     HERO_CAROUSEL_SLIDES,
     INTRODUCTION_DATA,
@@ -33,5 +33,6 @@ def about(request):
             "about": ABOUT_DATA,
             "management": TEAM_DATA["management"],
             "team": TEAM_DATA["team"],
+            "faq": FAQ_DATA,
         },
     )

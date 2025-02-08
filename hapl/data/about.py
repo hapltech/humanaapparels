@@ -52,3 +52,35 @@ TEAM_DATA = {
         },
     ],
 }
+
+FAQ_DATA = {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Common questions about our manufacturing services",
+    "questions": [
+        {
+            "id": "manufacturing-process",
+            "question": "What is your manufacturing process?",
+            "answer": "Our manufacturing process combines traditional craftsmanship with modern technology. We follow a rigorous quality control system at every stage, from fabric selection to final packaging, ensuring each garment meets international standards.",
+        },
+        {
+            "id": "minimum-order",
+            "question": "What is your minimum order quantity?",
+            "answer": "Our minimum order quantity (MOQ) varies by product type and complexity. Generally, we maintain a minimum of 500 pieces per style to ensure cost-effectiveness while maintaining quality standards.",
+        },
+        {
+            "id": "production-time",
+            "question": "How long does production typically take?",
+            "answer": "Production timelines depend on order size and complexity. Generally, standard orders take 4-6 weeks from approval to delivery. Rush orders can be accommodated based on availability.",
+        },
+        {
+            "id": "sustainability",
+            "question": "What sustainable practices do you follow?",
+            "answer": "We implement various sustainable practices including water recycling, solar power usage, organic material sourcing, and waste reduction programs. Our facilities are certified for environmental compliance.",
+        },
+        {
+            "id": "quality-control",
+            "question": "How do you ensure quality control?",
+            "answer": "We maintain strict quality control through multiple inspection points, from raw materials to finished products. Our QC team follows international standards and uses advanced testing equipment.",
+        },
+    ],
+}
