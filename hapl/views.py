@@ -1,5 +1,10 @@
 from django.shortcuts import render
-from hapl.data.home import HERO_CAROUSEL_SLIDES, FEATURED_ARTICLES, FEATURED_CLIENTS
+from hapl.data.home import (
+    HERO_CAROUSEL_SLIDES,
+    FEATURED_ARTICLES,
+    FEATURED_CLIENTS,
+    COMPANY_STATS,
+)
 
 
 def index(request):
@@ -10,5 +15,6 @@ def index(request):
             "hero_slides": HERO_CAROUSEL_SLIDES,
             "articles": FEATURED_ARTICLES,
             "clients": FEATURED_CLIENTS,
+            "stats": COMPANY_STATS,
         },
     )

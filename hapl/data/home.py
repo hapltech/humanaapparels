@@ -101,3 +101,10 @@ FEATURED_CLIENTS = [
         "url": "#",
     },
 ]
+
+COMPANY_STATS = [
+    {"value": "25+", "label": "Years Experience"},
+    {"value": "500+", "label": "Employees"},
+    {"value": "50M+", "label": "Units Produced"},
+    {"value": "20+", "label": "Countries Served"},
+]
