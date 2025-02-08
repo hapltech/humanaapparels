@@ -10,3 +10,45 @@ ABOUT_DATA = {
         <p>We believe in fostering long-term relationships with our clients, understanding their unique needs, and delivering solutions that exceed expectations. Our team of skilled artisans and modern facilities enables us to handle diverse manufacturing requirements while maintaining consistent quality and timely delivery.</p>
     """,
 }
+
+TEAM_DATA = {
+    "management": [
+        {
+            "name": "John Smith",
+            "position": "Chief Executive Officer",
+            "image": "https://picsum.photos/320/320?random=1",
+        },
+        {
+            "name": "Sarah Johnson",
+            "position": "Managing Director",
+            "image": "https://picsum.photos/320/320?random=2",
+        },
+        {
+            "name": "Michael Chen",
+            "position": "Operations Director",
+            "image": "https://picsum.photos/320/320?random=3",
+        },
+    ],
+    "team": [
+        {
+            "name": "David Lee",
+            "position": "Production Manager",
+            "image": "https://picsum.photos/320/320?random=4",
+        },
+        {
+            "name": "Emily Brown",
+            "position": "Quality Control Manager",
+            "image": "https://picsum.photos/320/320?random=5",
+        },
+        {
+            "name": "James Wilson",
+            "position": "Supply Chain Manager",
+            "image": "https://picsum.photos/320/320?random=6",
+        },
+        {
+            "name": "Linda Miller",
+            "position": "HR Manager",
+            "image": "https://picsum.photos/320/320?random=7",
+        },
+    ],
+}

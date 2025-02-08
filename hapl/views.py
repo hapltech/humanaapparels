@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from hapl.data.about import ABOUT_DATA
+from hapl.data.about import ABOUT_DATA, TEAM_DATA
 from hapl.data.home import (
     HERO_CAROUSEL_SLIDES,
     INTRODUCTION_DATA,
@@ -26,4 +26,12 @@ def home(request):
 
 
 def about(request):
-    return render(request, "www/about.html", {"about": ABOUT_DATA})
+    return render(
+        request,
+        "www/about.html",
+        {
+            "about": ABOUT_DATA,
+            "management": TEAM_DATA["management"],
+            "team": TEAM_DATA["team"],
+        },
+    )
