@@ -2,6 +2,7 @@ from django.shortcuts import render
 from hapl.data.about import ABOUT_DATA, TEAM_DATA, FAQ_DATA
 from hapl.data.customers import ALL_CLIENTS, TESTIMONIALS
 from hapl.data.contact import CONTACT_DATA
+from hapl.data.news import NEWS_DATA
 from hapl.data.home import (
     HERO_CAROUSEL_SLIDES,
     INTRODUCTION_DATA,
@@ -59,3 +60,7 @@ def contact(request):
             "contact": CONTACT_DATA,
         },
     )
+
+
+def news(request):
+    return render(request, "www/news.html", {"news": NEWS_DATA})
