@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from hapl.data.about import ABOUT_DATA, TEAM_DATA, FAQ_DATA
+from hapl.data.customers import ALL_CLIENTS, TESTIMONIALS
 from hapl.data.home import (
     HERO_CAROUSEL_SLIDES,
     INTRODUCTION_DATA,
@@ -34,5 +35,16 @@ def about(request):
             "management": TEAM_DATA["management"],
             "team": TEAM_DATA["team"],
             "faq": FAQ_DATA,
+        },
+    )
+
+
+def customers(request):
+    return render(
+        request,
+        "www/customers.html",
+        {
+            "clients_data": ALL_CLIENTS,
+            "testimonials": TESTIMONIALS,
         },
     )
