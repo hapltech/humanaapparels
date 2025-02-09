@@ -3,6 +3,7 @@ from hapl.data.about import ABOUT_DATA, TEAM_DATA, FAQ_DATA
 from hapl.data.customers import ALL_CLIENTS, TESTIMONIALS
 from hapl.data.contact import CONTACT_DATA
 from hapl.data.news import NEWS_DATA
+from django.http import Http404
 from hapl.data.home import (
     HERO_CAROUSEL_SLIDES,
     INTRODUCTION_DATA,
@@ -64,3 +65,21 @@ def contact(request):
 
 def news(request):
     return render(request, "www/news.html", {"news": NEWS_DATA})
+
+
+def article(request, article_id):
+    article = next(
+        (article for article in NEWS_DATA["articles"] if article["id"] == article_id),
+        None,
+    )
+    if not article:
+        raise Http404("Article not found")
+
+    # Get recent articles excluding current one
+    recent_articles = [a for a in NEWS_DATA["articles"] if a["id"] != article_id][:3]
+
+    return render(
+        request,
+        "www/article.html",
+        {"article": article, "recent_articles": recent_articles},
+    )

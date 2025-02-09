@@ -8,8 +8,8 @@
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
     {% for article in news.articles %}
       <!-- Card -->
-      <a class="group flex flex-col h-full rounded-xl focus:outline-none p-4 sm:p-6 bg-card hover:bg-card/90 transition duration-300"
-         href="#">
+      <a class="group flex flex-col h-full rounded-xl focus:outline-none p-4 sm:p-6 bg-card hover:bg-card/90 transition duration-300 border border-border/40"
+         href="{% url "article" article.id %}">
         <!-- Image -->
         <div class="aspect-video overflow-hidden rounded-xl">
           <img class="w-full object-cover transition duration-300 group-hover:opacity-90 group-hover:scale-105"
