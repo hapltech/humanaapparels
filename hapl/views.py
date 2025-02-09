@@ -2,6 +2,7 @@ from django.shortcuts import render
 from hapl.data.about import ABOUT_DATA, TEAM_DATA, FAQ_DATA
 from hapl.data.customers import ALL_CLIENTS, TESTIMONIALS
 from hapl.data.contact import CONTACT_DATA
+from hapl.data.career import CAREER_DATA
 from hapl.data.news import NEWS_DATA
 from django.http import Http404
 from hapl.data.home import (
@@ -82,4 +83,13 @@ def article(request, article_id):
         request,
         "www/article.html",
         {"article": article, "recent_articles": recent_articles},
+    )
+
+
+def career(request):
+    active_positions = [p for p in CAREER_DATA["positions"] if p["status"] == "active"]
+    return render(
+        request,
+        "www/career.html",
+        {"career": CAREER_DATA, "positions": active_positions},
     )

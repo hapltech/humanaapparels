@@ -1,0 +1,89 @@
+<div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+  <div class="grid gap-4 sm:gap-6">
+    {% for position in positions %}
+      <!-- Position Card -->
+      <div class="group flex flex-col bg-card hover:bg-card/90 border border-border/40 transition p-4 md:p-5 rounded-xl">
+        <div class="flex justify-between items-start gap-2">
+          <!-- Position Info -->
+          <div class="flex-1">
+            <h3 class="text-xl font-semibold text-foreground group-hover:text-primary transition">{{ position.title }}</h3>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                {{ position.type }}
+              </span>
+              <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-medium bg-muted text-foreground/60">
+                <i class="ph ph-map-pin text-base"></i>
+                {{ position.location }}
+              </span>
+              <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-medium bg-muted text-foreground/60">
+                <i class="ph ph-users text-base"></i>
+                {{ position.department }}
+              </span>
+            </div>
+          </div>
+          <!-- Apply Button -->
+          <a class="inline-flex items-center justify-center size-8 text-sm font-semibold rounded-lg border border-border hover:border-primary text-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition"
+             href="#apply-{{ position.id }}"
+             data-hs-overlay="#apply-{{ position.id }}">
+            <i class="ph ph-arrow-right text-lg"></i>
+          </a>
+        </div>
+        <!-- Description Preview -->
+        <div class="mt-4 prose prose-sm dark:prose-invert">{{ position.description|safe }}</div>
+      </div>
+      <!-- Application Modal -->
+      <div id="apply-{{ position.id }}"
+           class="hs-overlay hidden size-full fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto pointer-events-none">
+        <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)]">
+          <div class="relative flex flex-col bg-card border border-border shadow-sm rounded-xl pointer-events-auto">
+            <!-- Header -->
+            <div class="p-4 sm:p-6 border-b border-border">
+              <h3 class="text-xl font-semibold text-foreground">Apply for {{ position.title }}</h3>
+              <p class="mt-1 text-sm text-foreground/60">{{ position.department }} - {{ position.location }}</p>
+            </div>
+            <!-- Form -->
+            <form class="p-4 sm:p-6 space-y-4">
+              <div>
+                <label class="block text-sm font-medium mb-2 text-foreground">Full Name</label>
+                <input type="text"
+                       class="w-full px-3 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground"
+                       required>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2 text-foreground">Email</label>
+                <input type="email"
+                       class="w-full px-3 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground"
+                       required>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2 text-foreground">
+                  Resume/CV
+                  <span class="text-xs text-foreground/60">(PDF, max 5MB)</span>
+                </label>
+                <input type="file"
+                       accept=".pdf"
+                       class="block w-full border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-muted file:text-foreground/60"
+                       required>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2 text-foreground">Cover Letter</label>
+                <textarea class="w-full h-32 px-3 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-foreground resize-none"
+                          required></textarea>
+              </div>
+            </form>
+            <!-- Footer -->
+            <div class="flex justify-end items-center gap-x-2 p-4 sm:px-6 border-t border-border">
+              <button type="button"
+                      class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-border text-foreground/60 hover:text-foreground"
+                      data-hs-overlay="#apply-{{ position.id }}">Cancel</button>
+              <button type="submit"
+                      class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:pointer-events-none">
+                Submit Application
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
