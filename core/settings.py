@@ -100,8 +100,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "core.wsgi.application"
 
 # --- STATIC AND MEDIA URLS ---
-STATIC_URL = "static/"
-MEDIA_URL = "media/"
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
 
 # --- STATIC AND MEDIA ROOTS ---
 STATIC_ROOT = BASE_DIR / "staticfiles"
