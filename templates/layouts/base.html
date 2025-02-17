@@ -54,6 +54,11 @@
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     <!-- TAOS -->
     <script>document.documentElement.classList.add('js')</script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
     {% block extra_head %}
     {% endblock extra_head %}
   </head>
@@ -72,7 +77,6 @@
     <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
     <!-- Preline Module -->
     <script src="{% static "js/preline.js" %}"></script>
-    <script src="{% static "js/tailwindcss-intersect.js" %}"></script>
     {% block extra_scripts %}
     {% endblock extra_scripts %}
   </body>

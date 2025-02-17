@@ -23,6 +23,9 @@ module.exports = {
                 primary: "hsl(var(--primary))",
                 accent: "hsl(var(--accent))",
             },
+            fontFamily: {
+                sans: ["Chivo", ...defaultTheme.fontFamily.sans],
+            },
         },
     },
     darkMode: "class",
