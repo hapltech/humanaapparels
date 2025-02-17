@@ -15,6 +15,7 @@
         "tailwindcss": "^3.4.17"
     },
     "dependencies": {
-        "preline": "^2.7.0"
+        "preline": "^2.7.0",
+        "taos": "^1.0.5"
     }
 }

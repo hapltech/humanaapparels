@@ -52,20 +52,24 @@
     <link href="{% static "css/public.styles.css" %}" rel="stylesheet">
     <!-- Load Phosphor Icons via CDN -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <!-- TAOS -->
+    <script>document.documentElement.classList.add('js')</script>
     {% block extra_head %}
     {% endblock extra_head %}
   </head>
-  <body>
+  <body class="font-sans antialiased bg-background text-foreground">
     {% block header %}
       {% include "partials/header.html" %}
     {% endblock header %}
-    <main>
+    <main class="w-full overflow-hidden">
       {% block content %}
       {% endblock content %}
     </main>
     {% block footer %}
       {% include "partials/footer.html" %}
     {% endblock footer %}
+    <!-- TAOS -->
+    <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
     <!-- Preline Module -->
     <script src="{% static "js/preline.js" %}"></script>
     <script src="{% static "js/tailwindcss-intersect.js" %}"></script>

@@ -2,13 +2,17 @@ import defaultTheme from "tailwindcss/defaultTheme";
 
 module.exports = {
     darkMode: "class",
-    content: [
-        "./node_modules/preline/preline.js",
-        "./templates/**/*.{html,js,py}",
-        "!./templates/admin/**/*.{html,js,py}",
-        "./common/**/*.{html,js}",
-        "./users/**/*.{html,js}",
-    ],
+    content: {
+        relative: true,
+        transform: (content) => content.replace(/taos:/g, ""),
+        files: [
+            "./node_modules/preline/preline.js",
+            "./templates/**/*.{html,js,py}",
+            "!./templates/admin/**/*.{html,js,py}",
+            "./common/**/*.{html,js}",
+            "./users/**/*.{html,js}",
+        ],
+    },
     theme: {
         extend: {
             colors: {
@@ -26,5 +30,11 @@ module.exports = {
         require("@tailwindcss/typography"),
         require("@tailwindcss/forms"),
         require("preline/plugin"),
+        require("taos/plugin"),
+    ],
+    safelist: [
+        "!duration-[0ms]",
+        "!delay-[0ms]",
+        'html.js :where([class*="taos:"]:not(.taos-init))',
     ],
 };
