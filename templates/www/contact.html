@@ -7,7 +7,13 @@
 {% endblock meta_description %}
 {% block content %}
   <!-- Contact Information -->
-  {% include "partials/contact_information.html" %}
+  <section data-taos-offset="300"
+           class="duration-[600ms] taos:translate-y-[-50%] taos:opacity-0 [animation-iteration-count:infinite]">
+    {% include "partials/contact_information.html" %}
+  </section>
   <!-- Office Location Map -->
-  {% include "partials/office_location_map.html" %}
+  <section data-taos-offset="300"
+           class="delay-[300ms] duration-[800ms] taos:scale-[0.9] taos:opacity-0 [animation-iteration-count:infinite]">
+    {% include "partials/office_location_map.html" %}
+  </section>
 {% endblock content %}
