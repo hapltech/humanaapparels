@@ -5,7 +5,7 @@
       <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
         {% for slide in hero_slides %}
           <div class="hs-carousel-slide relative w-full">
-            <img src="{{ slide.image }}"
+            <img src="{{ slide.image.url }}"
                  alt="{{ slide.title|default:'Slide Image' }}"
                  class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent">

@@ -41,7 +41,7 @@
                    aria-labelledby="service-tab-{{ service.id }}"
                    {% if not forloop.first %}class="hidden"{% endif %}>
                 <img class="shadow-xl shadow-foreground/5 rounded-xl"
-                     src="{{ service.image }}"
+                     src="{{ service.image.url }}"
                      alt="{{ service.title }}">
               </div>
             {% endfor %}

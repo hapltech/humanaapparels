@@ -1,17 +1,22 @@
 from django.shortcuts import render
-from hapl.data.about import ABOUT_DATA, TEAM_DATA, FAQ_DATA
-from hapl.data.customers import ALL_CLIENTS, TESTIMONIALS
-from hapl.data.contact import CONTACT_DATA
-from hapl.data.career import CAREER_DATA
-from hapl.data.news import NEWS_DATA
 from django.http import Http404
-from hapl.data.home import (
-    HERO_CAROUSEL_SLIDES,
-    INTRODUCTION_DATA,
-    FEATURED_ARTICLES,
-    FEATURED_CLIENTS,
-    COMPANY_STATS,
-    SERVICES,
+from hapl.models import (
+    HomeCarouselSlide,
+    HomeIntroduction,
+    FeaturedArticle,
+    FeaturedClient,
+    CompanyStats,
+    Service,
+    AboutData,
+    TeamMember,
+    FAQ,
+    Customer,
+    Testimonial,
+    ContactData,
+    ContactGroup,
+    CareerPosition,
+    NewsArticle,
+    Social,
 )
 
 
@@ -20,12 +25,12 @@ def home(request):
         request,
         "www/home.html",
         {
-            "hero_slides": HERO_CAROUSEL_SLIDES,
-            "articles": FEATURED_ARTICLES,
-            "clients": FEATURED_CLIENTS,
-            "intro": INTRODUCTION_DATA,
-            "stats": COMPANY_STATS,
-            "services": SERVICES,
+            "hero_slides": HomeCarouselSlide.objects.filter(is_active=True),
+            "articles": FeaturedArticle.objects.all(),
+            "clients": FeaturedClient.objects.all(),
+            "intro": HomeIntroduction.objects.first(),
+            "stats": CompanyStats.objects.all(),
+            "services": Service.objects.all(),
         },
     )
 
@@ -35,10 +40,10 @@ def about(request):
         request,
         "www/about.html",
         {
-            "about": ABOUT_DATA,
-            "management": TEAM_DATA["management"],
-            "team": TEAM_DATA["team"],
-            "faq": FAQ_DATA,
+            "about": AboutData.objects.first(),
+            "management": TeamMember.objects.filter(is_management=True),
+            "team": TeamMember.objects.filter(is_management=False),
+            "faq": FAQ.objects.all(),
         },
     )
 
@@ -48,36 +53,41 @@ def customers(request):
         request,
         "www/customers.html",
         {
-            "clients_data": ALL_CLIENTS,
-            "testimonials": TESTIMONIALS,
+            "clients_data": Customer.objects.all(),
+            "testimonials": Testimonial.objects.all(),
         },
     )
 
 
 def contact(request):
+    contact_data = ContactData.objects.first()
+    contact_groups = ContactGroup.objects.all()
+    socials = Social.objects.all()
+
     return render(
         request,
         "www/contact.html",
         {
-            "contact": CONTACT_DATA,
+            "contact": contact_data,
+            "contact_groups": contact_groups,
+            "socials": socials,
         },
     )
 
 
 def news(request):
-    return render(request, "www/news.html", {"news": NEWS_DATA})
+    return render(request, "www/news.html", {"news": NewsArticle.objects.all()})
 
 
 def article(request, article_id):
-    article = next(
-        (article for article in NEWS_DATA["articles"] if article["id"] == article_id),
-        None,
-    )
-    if not article:
+    try:
+        article = NewsArticle.objects.get(pk=article_id)
+    except NewsArticle.DoesNotExist:
         raise Http404("Article not found")
 
-    # Get recent articles excluding current one
-    recent_articles = [a for a in NEWS_DATA["articles"] if a["id"] != article_id][:3]
+    recent_articles = NewsArticle.objects.exclude(pk=article_id).order_by(
+        "-published_at"
+    )[:3]
 
     return render(
         request,
@@ -87,9 +97,9 @@ def article(request, article_id):
 
 
 def career(request):
-    active_positions = [p for p in CAREER_DATA["positions"] if p["status"] == "active"]
+    active_positions = CareerPosition.objects.filter(status="active")
     return render(
         request,
         "www/career.html",
-        {"career": CAREER_DATA, "positions": active_positions},
+        {"positions": active_positions},
     )

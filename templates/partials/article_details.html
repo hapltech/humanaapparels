@@ -21,7 +21,7 @@
           <!-- Featured Image -->
           <figure class="relative w-full">
             <img class="w-full rounded-xl"
-                 src="{{ article.image }}"
+                 src="{{ article.image.url }}"
                  alt="{{ article.title }}">
           </figure>
           <!-- Content -->
@@ -45,7 +45,7 @@
               </div>
               <div class="shrink-0 relative rounded-lg overflow-hidden size-20">
                 <img class="size-full absolute top-0 start-0 object-cover rounded-lg"
-                     src="{{ recent.image }}"
+                     src="{{ recent.image.url }}"
                      alt="{{ recent.title }}">
               </div>
             </a>

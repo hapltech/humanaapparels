@@ -9,7 +9,7 @@
     <!-- Office Image -->
     <div class="relative h-96 rounded-xl overflow-hidden">
       <img class="w-full h-full object-cover"
-           src="{{ contact.office.image }}"
+           src="{{ contact.office.image.url }}"
            alt="Humana Apparels Office">
     </div>
     <!-- Contact Details -->
@@ -69,7 +69,7 @@
           <div class="flex flex-col rounded-xl p-4 md:p-6 bg-card border border-border/40 hover:border-primary/40 transition">
             <div class="flex items-center gap-x-4">
               <img class="rounded-full size-16 object-cover"
-                   src="{{ member.image }}"
+                   src="{{ member.image.url }}"
                    alt="{{ member.name }}">
               <div class="grow">
                 <h4 class="font-medium text-foreground">{{ member.name }}</h4>
