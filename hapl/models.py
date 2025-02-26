@@ -1,37 +1,39 @@
 from django.db import models
+from common.models import BaseModel
 from common.fields import OptimizedImageField
 
 
-class HomeCarouselSlide(models.Model):
+class HomeCarouselSlide(BaseModel):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=500, blank=True, null=True)
     image = OptimizedImageField(upload_to="home/carousel/")
     is_active = models.BooleanField(default=True)
+    cta_text = models.CharField(max_length=100, blank=True, null=True)
+    cta_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.title
 
 
-class HomeIntroduction(models.Model):
+class HomeIntroduction(BaseModel):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=500, blank=True, null=True)
     content = models.TextField(null=True, blank=True)
 
-    def __str__(self):
-        return self.title
 
-
-class FeaturedArticle(models.Model):
+class FeaturedArticle(BaseModel):
     title = models.CharField(max_length=200)
     excerpt = models.CharField(max_length=500)
     image = OptimizedImageField(upload_to="home/articles/")
     article_url = models.URLField()
+    published_at = models.DateField(null=True, blank=True)
+    category = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.title
 
 
-class FeaturedClient(models.Model):
+class FeaturedClient(BaseModel):
     name = models.CharField(max_length=100)
     logo = OptimizedImageField(upload_to="home/clients/")
     url = models.URLField()
@@ -40,24 +42,28 @@ class FeaturedClient(models.Model):
         return self.name
 
 
-class CompanyStats(models.Model):
+class CompanyStats(BaseModel):
     title = models.CharField(max_length=100)
     value = models.CharField(max_length=50)
+    icon = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.title
 
 
-class Service(models.Model):
+class Service(BaseModel):
     title = models.CharField(max_length=200)
     description = models.TextField()
     icon = models.CharField(max_length=50, help_text="Font Awesome icon class")
+    image = OptimizedImageField(
+        upload_to="services/", blank=True, null=True
+    )
 
     def __str__(self):
         return self.title
 
 
-class AboutData(models.Model):
+class AboutData(BaseModel):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=500, blank=True, null=True)
     image = OptimizedImageField(upload_to="about/")
@@ -67,7 +73,7 @@ class AboutData(models.Model):
         return self.title
 
 
-class TeamMember(models.Model):
+class TeamMember(BaseModel):
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     image = OptimizedImageField(upload_to="team/")
@@ -77,7 +83,7 @@ class TeamMember(models.Model):
         return self.name
 
 
-class FAQ(models.Model):
+class FAQ(BaseModel):
     question = models.CharField(max_length=200)
     answer = models.TextField(null=True, blank=True)
 
@@ -85,7 +91,7 @@ class FAQ(models.Model):
         return self.question
 
 
-class Customer(models.Model):
+class Customer(BaseModel):
     name = models.CharField(max_length=100)
     logo = OptimizedImageField(upload_to="customers/")
     url = models.URLField()
@@ -94,7 +100,7 @@ class Customer(models.Model):
         return self.name
 
 
-class Testimonial(models.Model):
+class Testimonial(BaseModel):
     content = models.TextField()
     author = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
@@ -104,7 +110,7 @@ class Testimonial(models.Model):
         return self.author
 
 
-class ContactData(models.Model):
+class ContactData(BaseModel):
     map_title = models.CharField(max_length=200)
     map_subtitle = models.CharField(max_length=500, blank=True, null=True)
     map_image = OptimizedImageField(upload_to="contact/")
@@ -124,14 +130,14 @@ class ContactData(models.Model):
         return self.map_title
 
 
-class ContactGroup(models.Model):
+class ContactGroup(BaseModel):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
-class ContactMember(models.Model):
+class ContactMember(BaseModel):
     group = models.ForeignKey(
         ContactGroup, related_name="members", on_delete=models.CASCADE
     )
@@ -145,7 +151,7 @@ class ContactMember(models.Model):
         return self.name
 
 
-class Social(models.Model):
+class Social(BaseModel):
     name = models.CharField(max_length=100)
     url = models.URLField()
     icon = models.CharField(max_length=50, help_text="Phosphor Icon class")
@@ -154,7 +160,7 @@ class Social(models.Model):
         return self.name
 
 
-class CareerPosition(models.Model):
+class CareerPosition(BaseModel):
     title = models.CharField(max_length=200)
     type = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
@@ -171,7 +177,7 @@ class CareerPosition(models.Model):
         return self.title
 
 
-class NewsArticle(models.Model):
+class NewsArticle(BaseModel):
     title = models.CharField(max_length=200)
     excerpt = models.CharField(max_length=500)
     content = models.TextField(null=True, blank=True)

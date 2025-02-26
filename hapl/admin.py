@@ -1,6 +1,6 @@
-from unfold.contrib.forms.widgets import WysiwygWidget
-from unfold.admin import ModelAdmin
 from django.contrib import admin
+from unfold.admin import ModelAdmin
+from unfold.contrib.forms.widgets import WysiwygWidget
 from django.db import models
 from hapl.models import (
     HomeCarouselSlide,
@@ -36,7 +36,7 @@ class HomeIntroductionAdmin(ModelAdmin):
 
 @admin.register(FeaturedArticle)
 class FeaturedArticleAdmin(ModelAdmin):
-    pass
+    list_display = ("title", "published_at", "category")
 
 
 @admin.register(FeaturedClient)
@@ -46,12 +46,12 @@ class FeaturedClientAdmin(ModelAdmin):
 
 @admin.register(CompanyStats)
 class CompanyStatsAdmin(ModelAdmin):
-    pass
+    list_display = ("title", "value", "icon")
 
 
 @admin.register(Service)
 class ServiceAdmin(ModelAdmin):
-    pass
+    list_display = ("title", "icon")
 
 
 @admin.register(AboutData)
@@ -102,7 +102,7 @@ class ContactMemberAdmin(ModelAdmin):
 
 @admin.register(Social)
 class SocialAdmin(ModelAdmin):
-    pass
+    list_display = ("name", "icon")
 
 
 @admin.register(CareerPosition)
