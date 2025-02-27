@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     # Local applications
     "common",
     "users",
-    "hapl"
+    "hapl",
+    "seeder",
 ]
 
 # --- MIDDLEWARE ---
