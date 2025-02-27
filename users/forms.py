@@ -14,9 +14,10 @@ class DepartmentAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["permissions"].queryset = Permission.objects.exclude(
-            codename__contains="historical"
-        )
+        if self.fields.get("permissions"):
+            self.fields["permissions"].queryset = Permission.objects.exclude(
+                codename__contains="historical"
+            )
 
 
 class RoleAdminForm(forms.ModelForm):
@@ -26,9 +27,10 @@ class RoleAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["permissions"].queryset = Permission.objects.exclude(
-            codename__contains="historical"
-        )
+        if self.fields.get("permissions"):
+            self.fields["permissions"].queryset = Permission.objects.exclude(
+                codename__contains="historical"
+            )
 
 
 class UserChangeForm(BaseUserChangeForm):
@@ -38,9 +40,10 @@ class UserChangeForm(BaseUserChangeForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["user_permissions"].queryset = Permission.objects.exclude(
-            codename__contains="historical"
-        )
+        if self.fields.get("user_permissions"):
+            self.fields["user_permissions"].queryset = Permission.objects.exclude(
+                codename__contains="historical"
+            )
 
 
 class UserCreationForm(BaseUserCreationForm):

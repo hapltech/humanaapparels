@@ -1,5 +1,4 @@
 from django.contrib.auth.models import AbstractUser, Permission
-from guardian.shortcuts import assign_perm
 from django.db import models
 
 
@@ -37,9 +36,6 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
-
-    def assign_basic_perms(self):
-        assign_perm("view_user", self, self)
 
     def has_perm(self, perm, obj=None):
         # Merge perms from department, roles, and user_permissions
