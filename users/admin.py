@@ -2,10 +2,12 @@ from django.contrib import admin
 from unfold.admin import ModelAdmin
 from django.contrib.auth.models import Group
 from users.models import User, Department, Role
-from users.forms import DepartmentAdminForm, RoleAdminForm, UserAdminForm
+from unfold.forms import AdminPasswordChangeForm
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from unfold.forms import (
-    AdminPasswordChangeForm,
+from users.forms import (
+    DepartmentAdminForm,
+    RoleAdminForm,
+    UserChangeForm,
     UserCreationForm,
 )
 
@@ -21,7 +23,7 @@ admin.site.unregister(Group)
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin, ModelAdmin):
-    form = UserAdminForm
+    form = UserChangeForm
     add_form = UserCreationForm
     change_password_form = AdminPasswordChangeForm
     list_display = ("username", "email", "first_name", "last_name", "department")
