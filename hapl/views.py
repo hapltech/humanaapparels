@@ -49,12 +49,25 @@ def about(request):
 
 
 def customers(request):
+    clients_data = {
+        "title": "Trusted by Global Fashion Brands",
+        "subtitle": "Partnering with industry leaders in sustainable fashion manufacturing",
+        "clients": Customer.objects.all(),
+    }
+
+    testimonials = {
+        "title": "What Our Clients Say",
+        "subtitle": "Read what our clients have to say about us",
+        "featured": Testimonial.objects.first(),
+        "testimonials": Testimonial.objects.all(),
+    }
+
     return render(
         request,
         "www/customers.html",
         {
-            "clients_data": Customer.objects.all(),
-            "testimonials": Testimonial.objects.all(),
+            "clients_data": clients_data,
+            "testimonials": testimonials,
         },
     )
 
@@ -68,15 +81,47 @@ def contact(request):
         request,
         "www/contact.html",
         {
-            "contact": contact_data,
-            "contact_groups": contact_groups,
-            "socials": socials,
+            "contact": {
+                "office": {
+                    "title": contact_data.office_title,
+                    "subtitle": contact_data.office_subtitle,
+                    "image": contact_data.office_image,
+                    "contacts": {
+                        "phones": list(
+                            filter(None, [contact_data.phone1, contact_data.phone2])
+                        ),
+                        "whatsapp": list(filter(None, [contact_data.whatsapp])),
+                        "emails": list(
+                            filter(None, [contact_data.email1, contact_data.email2])
+                        ),
+                    },
+                },
+                "groups": contact_groups,
+                "socials": socials,
+                "map": {
+                    "title": contact_data.map_title,
+                    "subtitle": contact_data.map_subtitle,
+                    "image": contact_data.map_image,
+                    "map_url": contact_data.map_url,
+                    "address": contact_data.address,
+                },
+            }
         },
     )
 
 
 def news(request):
-    return render(request, "www/news.html", {"news": NewsArticle.objects.all()})
+    return render(
+        request,
+        "www/news.html",
+        {
+            "news": {
+                "title": "Latest News & Updates",
+                "subtitle": "Stay informed about our latest developments, achievements, and industry insights",
+                "articles": NewsArticle.objects.all(),
+            }
+        },
+    )
 
 
 def article(request, article_id):
