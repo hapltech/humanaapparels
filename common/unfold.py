@@ -60,6 +60,16 @@ UNFOLD_CONFIG = {
                         "icon": "group",
                         "link": reverse_lazy("admin:users_user_changelist"),
                     },
+                    {
+                        "title": "Departments",
+                        "icon": "apartment",
+                        "link": reverse_lazy("admin:users_department_changelist"),
+                    },
+                    {
+                        "title": "Roles",
+                        "icon": "badge",
+                        "link": reverse_lazy("admin:users_role_changelist"),
+                    },
                 ],
             },
             {
