@@ -1,3 +1,4 @@
+import logging
 from django.core.management.base import BaseCommand
 from seeder.content_seeder import (
     HomeSeeder,
@@ -9,14 +10,29 @@ from seeder.content_seeder import (
 )
 
 
+logger = logging.getLogger(__name__)
+
+
 class Command(BaseCommand):
     help = "Seeds the database with initial data"
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--clean",
+            action="store_true",
+            help="Delete existing data before seeding",
+        )
+
     def handle(self, *args, **options):
-        HomeSeeder().run()
-        AboutSeeder().run()
-        CustomerSeeder().run()
-        ContactSeeder().run()
-        CareerSeeder().run()
-        NewsSeeder().run()
-        self.stdout.write(self.style.SUCCESS("Data seeding complete!"))
+        clean = options["clean"]
+
+        logger.info("🚀 Starting data seeding...")
+
+        HomeSeeder(clean=clean).run()
+        AboutSeeder(clean=clean).run()
+        CustomerSeeder(clean=clean).run()
+        ContactSeeder(clean=clean).run()
+        CareerSeeder(clean=clean).run()
+        NewsSeeder(clean=clean).run()
+
+        logger.info("🎉 Data seeding complete!")

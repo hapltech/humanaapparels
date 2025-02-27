@@ -1,6 +1,10 @@
 import io
+import logging
 import requests
 from django.core.files.images import ImageFile
+
+
+logger = logging.getLogger(__name__)
 
 
 IMAGE_CACHE = {}
@@ -17,10 +21,10 @@ def cache_image(width, height, keyword=None):
         url += f"?random={keyword}"
 
     try:
-        response = requests.get(url, stream=True, timeout=10)  # Added timeout
+        response = requests.get(url, stream=True, timeout=10)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
-        print(f"Error downloading image: {e}")
+        logger.error(f"❌ Error downloading image: {e}")
         return None
 
     image_data = io.BytesIO(response.content)
