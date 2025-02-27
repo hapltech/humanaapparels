@@ -4,7 +4,7 @@ from pathlib import Path
 from logging import getLogger
 from datetime import timedelta
 from dotenv import load_dotenv
-from core.unfold import UNFOLD_CONFIG
+from common.unfold import UNFOLD_CONFIG
 from django.core.management.utils import get_random_secret_key
 
 
