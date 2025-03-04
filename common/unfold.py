@@ -73,51 +73,74 @@ UNFOLD_CONFIG = {
                 ],
             },
             {
-                "title": "Content Management",
+                "title": "Home Page",
                 "separator": True,
                 "collapsible": True,
+                "icon": "home",
                 "items": [
                     {
-                        "title": "Home Carousel Slides",
-                        "icon": "photo",
+                        "title": "Hero Section",
+                        "icon": "featured_video",
+                        "link": reverse_lazy("admin:hapl_homeherosection_changelist"),
+                    },
+                    {
+                        "title": "Carousel Slides",
+                        "icon": "photo_library",
                         "link": reverse_lazy("admin:hapl_homecarouselslide_changelist"),
                     },
                     {
-                        "title": "Home Introduction",
-                        "icon": "home",
-                        "link": reverse_lazy("admin:hapl_homeintroduction_changelist"),
+                        "title": "Introduction Section",
+                        "icon": "info",
+                        "link": reverse_lazy(
+                            "admin:hapl_homeintroductionsection_changelist"
+                        ),
                     },
                     {
-                        "title": "Home Introduction Features",
-                        "icon": "home",
+                        "title": "Introduction Features",
+                        "icon": "stars",
                         "link": reverse_lazy(
                             "admin:hapl_homeintroductionfeature_changelist"
                         ),
                     },
                     {
-                        "title": "Featured Articles",
-                        "icon": "article",
-                        "link": reverse_lazy("admin:hapl_featuredarticle_changelist"),
+                        "title": "Services Section",
+                        "icon": "design_services",
+                        "link": reverse_lazy(
+                            "admin:hapl_homeservicessection_changelist"
+                        ),
                     },
                     {
-                        "title": "Featured Clients",
-                        "icon": "handshake",
-                        "link": reverse_lazy("admin:hapl_featuredclient_changelist"),
+                        "title": "Services",
+                        "icon": "apparel",
+                        "link": reverse_lazy("admin:hapl_service_changelist"),
+                    },
+                    {
+                        "title": "Stats Section",
+                        "icon": "assessment",
+                        "link": reverse_lazy("admin:hapl_homestatssection_changelist"),
                     },
                     {
                         "title": "Company Stats",
                         "icon": "leaderboard",
                         "link": reverse_lazy("admin:hapl_companystats_changelist"),
                     },
+                ],
+            },
+            {
+                "title": "About Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "info",
+                "items": [
                     {
-                        "title": "Services",
-                        "icon": "settings",
-                        "link": reverse_lazy("admin:hapl_service_changelist"),
+                        "title": "About Section",
+                        "icon": "description",
+                        "link": reverse_lazy("admin:hapl_aboutsection_changelist"),
                     },
                     {
-                        "title": "About Data",
-                        "icon": "info",
-                        "link": reverse_lazy("admin:hapl_aboutdata_changelist"),
+                        "title": "Team Section",
+                        "icon": "diversity_3",
+                        "link": reverse_lazy("admin:hapl_teamsection_changelist"),
                     },
                     {
                         "title": "Team Members",
@@ -125,43 +148,122 @@ UNFOLD_CONFIG = {
                         "link": reverse_lazy("admin:hapl_teammember_changelist"),
                     },
                     {
+                        "title": "FAQ Section",
+                        "icon": "quiz",
+                        "link": reverse_lazy("admin:hapl_faqsection_changelist"),
+                    },
+                    {
                         "title": "FAQs",
                         "icon": "help",
                         "link": reverse_lazy("admin:hapl_faq_changelist"),
                     },
+                ],
+            },
+            {
+                "title": "Customers Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "storefront",
+                "items": [
+                    {
+                        "title": "Customers Section",
+                        "icon": "business",
+                        "link": reverse_lazy("admin:hapl_customerssection_changelist"),
+                    },
                     {
                         "title": "Customers",
-                        "icon": "storefront",
+                        "icon": "store",
                         "link": reverse_lazy("admin:hapl_customer_changelist"),
+                    },
+                    {
+                        "title": "Testimonials Section",
+                        "icon": "forum",
+                        "link": reverse_lazy(
+                            "admin:hapl_testimonialssection_changelist"
+                        ),
                     },
                     {
                         "title": "Testimonials",
                         "icon": "comment",
                         "link": reverse_lazy("admin:hapl_testimonial_changelist"),
                     },
+                ],
+            },
+            {
+                "title": "Contact Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "contact_page",
+                "items": [
+                    {
+                        "title": "Contact Section",
+                        "icon": "contact_mail",
+                        "link": reverse_lazy("admin:hapl_contactsection_changelist"),
+                    },
                     {
                         "title": "Contact Data",
-                        "icon": "email",
+                        "icon": "location_on",
                         "link": reverse_lazy("admin:hapl_contactdata_changelist"),
                     },
                     {
+                        "title": "Phone Numbers",
+                        "icon": "phone",
+                        "link": reverse_lazy("admin:hapl_contactphone_changelist"),
+                    },
+                    {
+                        "title": "Email Addresses",
+                        "icon": "email",
+                        "link": reverse_lazy("admin:hapl_contactemail_changelist"),
+                    },
+                    {
                         "title": "Contact Groups",
-                        "icon": "contacts",
+                        "icon": "group_work",
                         "link": reverse_lazy("admin:hapl_contactgroup_changelist"),
+                    },
+                    {
+                        "title": "Contact Members",
+                        "icon": "contacts",
+                        "link": reverse_lazy("admin:hapl_contactmember_changelist"),
                     },
                     {
                         "title": "Social Links",
                         "icon": "share",
                         "link": reverse_lazy("admin:hapl_social_changelist"),
                     },
+                ],
+            },
+            {
+                "title": "Career Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "work",
+                "items": [
+                    {
+                        "title": "Career Section",
+                        "icon": "business_center",
+                        "link": reverse_lazy("admin:hapl_careersection_changelist"),
+                    },
                     {
                         "title": "Career Positions",
-                        "icon": "work",
+                        "icon": "work_outline",
                         "link": reverse_lazy("admin:hapl_careerposition_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "News Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "article",
+                "items": [
+                    {
+                        "title": "News Section",
+                        "icon": "newspaper",
+                        "link": reverse_lazy("admin:hapl_newssection_changelist"),
                     },
                     {
                         "title": "News Articles",
-                        "icon": "newspaper",
+                        "icon": "feed",
                         "link": reverse_lazy("admin:hapl_newsarticle_changelist"),
                     },
                 ],
