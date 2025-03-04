@@ -1,115 +1,203 @@
 from django.shortcuts import render
 from django.http import Http404
 from hapl.models import (
+    HomeHeroSection,
     HomeCarouselSlide,
-    HomeIntroduction,
-    FeaturedArticle,
-    FeaturedClient,
-    CompanyStats,
+    HomeIntroductionSection,
+    HomeIntroductionFeature,
+    HomeServicesSection,
     Service,
-    AboutData,
+    HomeStatsSection,
+    CompanyStats,
+    AboutSection,
+    TeamSection,
     TeamMember,
+    FAQSection,
     FAQ,
+    CustomersSection,
     Customer,
+    TestimonialsSection,
     Testimonial,
+    ContactSection,
     ContactData,
+    ContactPhone,
+    ContactEmail,
     ContactGroup,
+    CareerSection,
     CareerPosition,
+    NewsSection,
     NewsArticle,
     Social,
 )
 
 
 def home(request):
+    hero_section = HomeHeroSection.objects.first()
+    intro_section = HomeIntroductionSection.objects.first()
+    stats_section = HomeStatsSection.objects.first()
+    services_section = HomeServicesSection.objects.first()
+
     return render(
         request,
         "www/home.html",
         {
-            "hero_slides": HomeCarouselSlide.objects.filter(is_active=True),
-            "articles": FeaturedArticle.objects.all(),
-            "clients": FeaturedClient.objects.all(),
-            "intro": HomeIntroduction.objects.first(),
-            "stats": CompanyStats.objects.all(),
-            "services": Service.objects.all(),
+            "hero": {
+                "title": (
+                    hero_section.title if hero_section else "Welcome to Humana Apparels"
+                ),
+                "subtitle": hero_section.subtitle if hero_section else None,
+                "slides": HomeCarouselSlide.objects.filter(is_active=True),
+            },
+            "articles": NewsArticle.objects.filter(is_featured=True),
+            "clients": Customer.objects.filter(is_featured=True),
+            "intro": intro_section,
+            "intro_features": (
+                HomeIntroductionFeature.objects.filter(introduction=intro_section)
+                if intro_section
+                else []
+            ),
+            "stats": {
+                "title": (
+                    stats_section.title if stats_section else "Our Impact in Numbers"
+                ),
+                "subtitle": stats_section.subtitle if stats_section else None,
+                "items": CompanyStats.objects.all(),
+            },
+            "services": {
+                "title": services_section.title if services_section else "Our Services",
+                "subtitle": services_section.subtitle if services_section else None,
+                "items": Service.objects.all(),
+            },
         },
     )
 
 
 def about(request):
-    faq = {
-        "title": "Frequently Asked Questions",
-        "subtitle": "Get answers to common questions about our services",
-        "faqs": FAQ.objects.all(),
-    }
+    about_section = AboutSection.objects.first()
+    team_section = TeamSection.objects.first()
+    faq_section = FAQSection.objects.first()
 
     return render(
         request,
         "www/about.html",
         {
-            "about": AboutData.objects.first(),
-            "management": TeamMember.objects.filter(is_management=True),
-            "team": TeamMember.objects.filter(is_management=False),
-            "faq": faq,
+            "about": about_section,
+            "team": {
+                "title": team_section.title if team_section else "Our Team",
+                "subtitle": team_section.subtitle if team_section else None,
+                "management": TeamMember.objects.filter(is_management=True),
+                "staff": TeamMember.objects.filter(is_management=False),
+            },
+            "faq": {
+                "title": (
+                    faq_section.title if faq_section else "Frequently Asked Questions"
+                ),
+                "subtitle": (
+                    faq_section.subtitle
+                    if faq_section
+                    else "Get answers to common questions about our services"
+                ),
+                "faqs": FAQ.objects.all(),
+            },
         },
     )
 
 
 def customers(request):
-    clients_data = {
-        "title": "Trusted by Global Fashion Brands",
-        "subtitle": "Partnering with industry leaders in sustainable fashion manufacturing",
-        "clients": Customer.objects.all(),
-    }
+    customers_section = CustomersSection.objects.first()
+    testimonials_section = TestimonialsSection.objects.first()
 
-    testimonials = {
-        "title": "What Our Clients Say",
-        "subtitle": "Read what our clients have to say about us",
-        "featured": Testimonial.objects.first(),
-        "testimonials": Testimonial.objects.all(),
-    }
+    featured_testimonial = (
+        Testimonial.objects.filter(is_featured=True).first()
+        or Testimonial.objects.first()
+    )
 
     return render(
         request,
         "www/customers.html",
         {
-            "clients_data": clients_data,
-            "testimonials": testimonials,
+            "clients_data": {
+                "title": (
+                    customers_section.title
+                    if customers_section
+                    else "Trusted by Global Fashion Brands"
+                ),
+                "subtitle": (
+                    customers_section.subtitle
+                    if customers_section
+                    else "Partnering with industry leaders in sustainable fashion manufacturing"
+                ),
+                "clients": Customer.objects.all(),
+            },
+            "testimonials": {
+                "title": (
+                    testimonials_section.title
+                    if testimonials_section
+                    else "What Our Clients Say"
+                ),
+                "subtitle": (
+                    testimonials_section.subtitle
+                    if testimonials_section
+                    else "Read what our clients have to say about us"
+                ),
+                "featured": featured_testimonial,
+                "testimonials": Testimonial.objects.all(),
+            },
         },
     )
 
 
 def contact(request):
+    contact_section = ContactSection.objects.first()
     contact_data = ContactData.objects.first()
     contact_groups = ContactGroup.objects.all()
     socials = Social.objects.all()
+
+    phones = {"office": [], "mobile": [], "whatsapp": []}
+
+    if contact_data:
+        for phone in ContactPhone.objects.filter(contact=contact_data):
+            phones[phone.type].append(phone.number)
+
+    emails = []
+    if contact_data:
+        emails = [
+            email.email for email in ContactEmail.objects.filter(contact=contact_data)
+        ]
 
     return render(
         request,
         "www/contact.html",
         {
             "contact": {
+                "title": contact_section.title if contact_section else "Contact Us",
+                "subtitle": (
+                    contact_section.subtitle
+                    if contact_section
+                    else "Get in touch with our team"
+                ),
                 "office": {
-                    "title": contact_data.office_title,
-                    "subtitle": contact_data.office_subtitle,
-                    "image": contact_data.office_image,
+                    "title": (
+                        contact_data.office_title if contact_data else "Our Office"
+                    ),
+                    "subtitle": contact_data.office_subtitle if contact_data else None,
+                    "image": contact_data.office_image if contact_data else None,
                     "contacts": {
-                        "phones": list(
-                            filter(None, [contact_data.phone1, contact_data.phone2])
-                        ),
-                        "whatsapp": list(filter(None, [contact_data.whatsapp])),
-                        "emails": list(
-                            filter(None, [contact_data.email1, contact_data.email2])
-                        ),
+                        "phones": phones["office"],
+                        "mobile": phones["mobile"],
+                        "whatsapp": phones["whatsapp"],
+                        "emails": emails,
+                        "fax": contact_data.fax if contact_data else None,
                     },
                 },
                 "groups": contact_groups,
                 "socials": socials,
                 "map": {
-                    "title": contact_data.map_title,
-                    "subtitle": contact_data.map_subtitle,
-                    "image": contact_data.map_image,
-                    "map_url": contact_data.map_url,
-                    "address": contact_data.address,
+                    "title": contact_data.map_title if contact_data else "Find Us",
+                    "subtitle": contact_data.map_subtitle if contact_data else None,
+                    "image": contact_data.map_image if contact_data else None,
+                    "map_url": contact_data.map_url if contact_data else None,
+                    "address": contact_data.address if contact_data else None,
                 },
             }
         },
@@ -117,13 +205,21 @@ def contact(request):
 
 
 def news(request):
+    news_section = NewsSection.objects.first()
+
     return render(
         request,
         "www/news.html",
         {
             "news": {
-                "title": "Latest News & Updates",
-                "subtitle": "Stay informed about our latest developments, achievements, and industry insights",
+                "title": (
+                    news_section.title if news_section else "Latest News & Updates"
+                ),
+                "subtitle": (
+                    news_section.subtitle
+                    if news_section
+                    else "Stay informed about our latest developments, achievements, and industry insights"
+                ),
                 "articles": NewsArticle.objects.all(),
             }
         },
@@ -148,9 +244,23 @@ def article(request, article_id):
 
 
 def career(request):
+    career_section = CareerSection.objects.first()
     active_positions = CareerPosition.objects.filter(status="active")
+
     return render(
         request,
         "www/career.html",
-        {"positions": active_positions},
+        {
+            "career": {
+                "title": (
+                    career_section.title if career_section else "Career Opportunities"
+                ),
+                "subtitle": (
+                    career_section.subtitle
+                    if career_section
+                    else "Join our team and grow with us"
+                ),
+                "positions": active_positions,
+            }
+        },
     )

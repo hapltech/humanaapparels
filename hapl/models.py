@@ -3,7 +3,30 @@ from common.models import BaseModel
 from common.fields import OptimizedImageField
 
 
+class BaseSection(BaseModel):
+    """Abstract base model for content sections with title and subtitle"""
+
+    title = models.CharField(max_length=200)
+    subtitle = models.CharField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.title
+
+
+# --- --- Home Page Models --- ---
+class HomeHeroSection(BaseSection):
+    """Section model for home page hero/carousel"""
+
+    pass
+
+
 class HomeCarouselSlide(BaseModel):
+    section = models.ForeignKey(
+        HomeHeroSection, related_name="slides", on_delete=models.CASCADE, null=True
+    )
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=500, blank=True, null=True)
     image = OptimizedImageField(upload_to="home/carousel/")
@@ -15,21 +38,16 @@ class HomeCarouselSlide(BaseModel):
         return self.title
 
 
-class HomeIntroduction(BaseModel):
-    title = models.CharField(max_length=200)
-    subtitle = models.CharField(max_length=500, blank=True, null=True)
-    content = models.TextField(null=True, blank=True)
-    image = OptimizedImageField(
-        upload_to="home/", blank=True, null=True
-    )
+class HomeIntroductionSection(BaseSection):
+    """Section model for home page introduction"""
 
-    def __str__(self):
-        return self.title
+    content = models.TextField(null=True, blank=True)
+    image = OptimizedImageField(upload_to="home/", blank=True, null=True)
 
 
 class HomeIntroductionFeature(BaseModel):
     introduction = models.ForeignKey(
-        HomeIntroduction, related_name="features", on_delete=models.CASCADE
+        HomeIntroductionSection, related_name="features", on_delete=models.CASCADE
     )
     icon = models.CharField(max_length=50)
     title = models.CharField(max_length=200)
@@ -39,28 +57,38 @@ class HomeIntroductionFeature(BaseModel):
         return self.title
 
 
-class FeaturedArticle(BaseModel):
+class HomeServicesSection(BaseSection):
+    """Section model for services showcase on home page"""
+
+    pass
+
+
+class Service(BaseModel):
+    section = models.ForeignKey(
+        HomeServicesSection,
+        related_name="services",
+        on_delete=models.CASCADE,
+        null=True,
+    )
     title = models.CharField(max_length=200)
-    excerpt = models.CharField(max_length=500)
-    image = OptimizedImageField(upload_to="home/articles/")
-    article_url = models.URLField()
-    published_at = models.DateField(null=True, blank=True)
-    category = models.CharField(max_length=100, blank=True, null=True)
+    description = models.TextField()
+    icon = models.CharField(max_length=50, help_text="Phosphor icon class")
+    image = OptimizedImageField(upload_to="services/", blank=True, null=True)
 
     def __str__(self):
         return self.title
 
 
-class FeaturedClient(BaseModel):
-    name = models.CharField(max_length=100)
-    logo = OptimizedImageField(upload_to="home/clients/")
-    url = models.URLField()
+class HomeStatsSection(BaseSection):
+    """Section model for company stats on home page"""
 
-    def __str__(self):
-        return self.name
+    pass
 
 
 class CompanyStats(BaseModel):
+    section = models.ForeignKey(
+        HomeStatsSection, related_name="stats", on_delete=models.CASCADE, null=True
+    )
     title = models.CharField(max_length=100)
     value = models.CharField(max_length=50)
     icon = models.CharField(max_length=50, blank=True, null=True)
@@ -69,27 +97,24 @@ class CompanyStats(BaseModel):
         return self.title
 
 
-class Service(BaseModel):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    icon = models.CharField(max_length=50, help_text="Font Awesome icon class")
-    image = OptimizedImageField(upload_to="services/", blank=True, null=True)
+# --- About Page Models ---
+class AboutSection(BaseSection):
+    """Main about section model"""
 
-    def __str__(self):
-        return self.title
-
-
-class AboutData(BaseModel):
-    title = models.CharField(max_length=200)
-    subtitle = models.CharField(max_length=500, blank=True, null=True)
-    image = OptimizedImageField(upload_to="about/")
     content = models.TextField(null=True, blank=True)
+    image = OptimizedImageField(upload_to="about/")
 
-    def __str__(self):
-        return self.title
+
+class TeamSection(BaseSection):
+    """Section model for team members"""
+
+    pass
 
 
 class TeamMember(BaseModel):
+    section = models.ForeignKey(
+        TeamSection, related_name="members", on_delete=models.CASCADE, null=True
+    )
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     image = OptimizedImageField(upload_to="team/")
@@ -99,7 +124,16 @@ class TeamMember(BaseModel):
         return self.name
 
 
+class FAQSection(BaseSection):
+    """Section model for frequently asked questions"""
+
+    pass
+
+
 class FAQ(BaseModel):
+    section = models.ForeignKey(
+        FAQSection, related_name="faqs", on_delete=models.CASCADE, null=True
+    )
     question = models.CharField(max_length=200)
     answer = models.TextField(null=True, blank=True)
 
@@ -107,26 +141,60 @@ class FAQ(BaseModel):
         return self.question
 
 
+# --- Customers Page Models ---
+class CustomersSection(BaseSection):
+    """Section model for customer showcase"""
+
+    pass
+
+
 class Customer(BaseModel):
+    section = models.ForeignKey(
+        CustomersSection, related_name="customers", on_delete=models.CASCADE, null=True
+    )
     name = models.CharField(max_length=100)
     logo = OptimizedImageField(upload_to="customers/")
     url = models.URLField()
+    is_featured = models.BooleanField(default=False, help_text="Display on home page")
 
     def __str__(self):
         return self.name
 
 
+class TestimonialsSection(BaseSection):
+    """Section model for client testimonials"""
+
+    pass
+
+
 class Testimonial(BaseModel):
+    section = models.ForeignKey(
+        TestimonialsSection,
+        related_name="testimonials",
+        on_delete=models.CASCADE,
+        null=True,
+    )
     content = models.TextField()
     author = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     company_logo = OptimizedImageField(upload_to="testimonials/")
+    is_featured = models.BooleanField(default=False, help_text="Featured testimonial")
 
     def __str__(self):
         return self.author
 
 
+# --- Contact Page Models ---
+class ContactSection(BaseSection):
+    """Main contact section model"""
+
+    pass
+
+
 class ContactData(BaseModel):
+    section = models.OneToOneField(
+        ContactSection, related_name="data", on_delete=models.CASCADE, null=True
+    )
     map_title = models.CharField(max_length=200)
     map_subtitle = models.CharField(max_length=500, blank=True, null=True)
     map_image = OptimizedImageField(upload_to="contact/")
@@ -135,18 +203,52 @@ class ContactData(BaseModel):
     office_title = models.CharField(max_length=200)
     office_subtitle = models.CharField(max_length=500, blank=True, null=True)
     office_image = OptimizedImageField(upload_to="contact/")
-    phone1 = models.CharField(max_length=20, blank=True, null=True)
-    phone2 = models.CharField(max_length=20, blank=True, null=True)
-    whatsapp = models.CharField(max_length=20, blank=True, null=True)
-    email1 = models.EmailField(blank=True, null=True)
-    email2 = models.EmailField(blank=True, null=True)
     fax = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
-        return self.map_title
+        return self.office_title
+
+
+class ContactMethod(BaseModel):
+    """Base model for contact methods (phone, email, etc.)"""
+
+    contact = models.ForeignKey(
+        ContactData, related_name="%(class)ss", on_delete=models.CASCADE
+    )
+    is_primary = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True
+
+
+class ContactPhone(ContactMethod):
+    number = models.CharField(max_length=20)
+    type = models.CharField(
+        max_length=20,
+        choices=(
+            ("office", "Office"),
+            ("mobile", "Mobile"),
+            ("whatsapp", "WhatsApp"),
+        ),
+        default="office",
+    )
+
+    def __str__(self):
+        return f"{self.type}: {self.number}"
+
+
+class ContactEmail(ContactMethod):
+    email = models.EmailField()
+    department = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.email
 
 
 class ContactGroup(BaseModel):
+    section = models.ForeignKey(
+        ContactSection, related_name="groups", on_delete=models.CASCADE, null=True
+    )
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -168,6 +270,9 @@ class ContactMember(BaseModel):
 
 
 class Social(BaseModel):
+    section = models.ForeignKey(
+        ContactSection, related_name="socials", on_delete=models.CASCADE, null=True
+    )
     name = models.CharField(max_length=100)
     url = models.URLField()
     icon = models.CharField(max_length=50, help_text="Phosphor Icon class")
@@ -176,7 +281,17 @@ class Social(BaseModel):
         return self.name
 
 
+# --- Career Page Models ---
+class CareerSection(BaseSection):
+    """Section model for career listings"""
+
+    pass
+
+
 class CareerPosition(BaseModel):
+    section = models.ForeignKey(
+        CareerSection, related_name="positions", on_delete=models.CASCADE, null=True
+    )
     title = models.CharField(max_length=200)
     type = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
@@ -193,13 +308,27 @@ class CareerPosition(BaseModel):
         return self.title
 
 
+# --- News Page Models ---
+class NewsSection(BaseSection):
+    """Section model for news articles"""
+
+    pass
+
+
 class NewsArticle(BaseModel):
+    section = models.ForeignKey(
+        NewsSection, related_name="articles", on_delete=models.CASCADE, null=True
+    )
     title = models.CharField(max_length=200)
     excerpt = models.CharField(max_length=500)
     content = models.TextField(null=True, blank=True)
     image = OptimizedImageField(upload_to="news/")
     published_at = models.DateField()
     category = models.CharField(max_length=100)
+    is_featured = models.BooleanField(default=False, help_text="Feature on home page")
+    article_url = models.URLField(
+        blank=True, null=True, help_text="Optional external URL"
+    )
 
     def __str__(self):
         return self.title
