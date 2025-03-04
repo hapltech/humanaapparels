@@ -153,7 +153,7 @@ def contact(request):
     contact_groups = ContactGroup.objects.all()
     socials = Social.objects.all()
 
-    phones = {"office": [], "mobile": [], "whatsapp": []}
+    phones = {"phone": [], "whatsapp": []}
 
     if contact_data:
         for phone in ContactPhone.objects.filter(contact=contact_data):
@@ -183,8 +183,7 @@ def contact(request):
                     "subtitle": contact_data.office_subtitle if contact_data else None,
                     "image": contact_data.office_image if contact_data else None,
                     "contacts": {
-                        "phones": phones["office"],
-                        "mobile": phones["mobile"],
+                        "phones": phones["phone"],
                         "whatsapp": phones["whatsapp"],
                         "emails": emails,
                         "fax": contact_data.fax if contact_data else None,

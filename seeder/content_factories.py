@@ -256,7 +256,7 @@ class CustomerFactory(BaseFactory):
     name = factory.Faker("company")
     logo = factory.LazyAttribute(lambda x: cache_image(300, 200, keyword="brand"))
     url = factory.Faker("url")
-    is_featured = factory.Faker("boolean", chance_of_getting_true=25)
+    is_featured = factory.Faker("boolean", chance_of_getting_true=75)
 
 
 class TestimonialFactory(BaseFactory):
@@ -270,7 +270,7 @@ class TestimonialFactory(BaseFactory):
     company_logo = factory.LazyAttribute(
         lambda x: cache_image(200, 200, keyword="logo")
     )
-    is_featured = factory.Faker("boolean", chance_of_getting_true=25)
+    is_featured = factory.Faker("boolean", chance_of_getting_true=50)
 
 
 class ContactDataFactory(BaseFactory):
@@ -297,7 +297,7 @@ class ContactPhoneFactory(BaseFactory):
 
     contact = factory.SubFactory(ContactDataFactory)
     number = factory.Faker("phone_number")
-    type = factory.Faker("random_element", elements=["office", "mobile", "whatsapp"])
+    type = factory.Faker("random_element", elements=["phone", "whatsapp"])
     is_primary = factory.Faker("boolean", chance_of_getting_true=25)
 
 

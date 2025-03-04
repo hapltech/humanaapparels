@@ -183,8 +183,7 @@ class ContactSeeder(Seeder):
         contact_data = ContactDataFactory.create(section=contact_section)
 
         # Add phone numbers and emails
-        ContactPhoneFactory.create(contact=contact_data, type="office", is_primary=True)
-        ContactPhoneFactory.create(contact=contact_data, type="mobile")
+        ContactPhoneFactory.create(contact=contact_data, type="phone", is_primary=True)
         ContactPhoneFactory.create(contact=contact_data, type="whatsapp")
 
         ContactEmailFactory.create(
