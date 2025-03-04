@@ -19,6 +19,24 @@ class HomeIntroduction(BaseModel):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=500, blank=True, null=True)
     content = models.TextField(null=True, blank=True)
+    image = OptimizedImageField(
+        upload_to="home/", blank=True, null=True
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class HomeIntroductionFeature(BaseModel):
+    introduction = models.ForeignKey(
+        HomeIntroduction, related_name="features", on_delete=models.CASCADE
+    )
+    icon = models.CharField(max_length=50)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
 
 
 class FeaturedArticle(BaseModel):
@@ -55,9 +73,7 @@ class Service(BaseModel):
     title = models.CharField(max_length=200)
     description = models.TextField()
     icon = models.CharField(max_length=50, help_text="Font Awesome icon class")
-    image = OptimizedImageField(
-        upload_to="services/", blank=True, null=True
-    )
+    image = OptimizedImageField(upload_to="services/", blank=True, null=True)
 
     def __str__(self):
         return self.title

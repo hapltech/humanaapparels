@@ -88,6 +88,13 @@ UNFOLD_CONFIG = {
                         "link": reverse_lazy("admin:hapl_homeintroduction_changelist"),
                     },
                     {
+                        "title": "Home Introduction Features",
+                        "icon": "home",
+                        "link": reverse_lazy(
+                            "admin:hapl_homeintroductionfeature_changelist"
+                        ),
+                    },
+                    {
                         "title": "Featured Articles",
                         "icon": "article",
                         "link": reverse_lazy("admin:hapl_featuredarticle_changelist"),

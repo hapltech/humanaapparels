@@ -15,18 +15,18 @@
                     {% if slide.title %}<h2 class="text-4xl font-bold text-foreground">{{ slide.title }}</h2>{% endif %}
                     {% if slide.subtitle %}<p class="text-xl text-foreground/80">{{ slide.subtitle }}</p>{% endif %}
                   </div>
-                  {% if slide.cta %}
-                    <a href="{{ slide.cta.url }}"
+                  {% if slide.cta_text %}
+                    <a href="{{ slide.cta_url }}"
                        class="inline-flex items-center px-6 py-3 text-sm text-primary font-bold bg-accent hover:bg-accent/90 rounded-lg transition">
-                      {{ slide.cta.text }}
+                      {{ slide.cta_text }}
                     </a>
                   {% endif %}
                 {% else %}
                   {% if slide.cta %}
                     <div class="flex">
-                      <a href="{{ slide.cta.url }}"
+                      <a href="{{ slide.cta_url }}"
                          class="inline-flex items-center px-8 py-4 text-lg text-primary font-bold bg-accent hover:bg-accent/90 rounded-full transition shadow-lg">
-                        {{ slide.cta.text }}
+                        {{ slide.cta_text }}
                       </a>
                     </div>
                   {% endif %}

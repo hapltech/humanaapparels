@@ -20,6 +20,7 @@ from hapl.models import (
     Social,
     CareerPosition,
     NewsArticle,
+    HomeIntroductionFeature,
 )
 
 
@@ -32,6 +33,11 @@ class HomeCarouselSlideAdmin(ModelAdmin):
 @admin.register(HomeIntroduction)
 class HomeIntroductionAdmin(ModelAdmin):
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+@admin.register(HomeIntroductionFeature)
+class HomeIntroductionFeatureAdmin(ModelAdmin):
+    list_display = ("title", "icon")
 
 
 @admin.register(FeaturedArticle)

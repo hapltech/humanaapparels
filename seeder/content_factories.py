@@ -19,6 +19,7 @@ from hapl.models import (
     Social,
     CareerPosition,
     NewsArticle,
+    HomeIntroductionFeature,
 )
 
 
@@ -51,6 +52,26 @@ class HomeIntroductionFactory(BaseFactory):
     title = "Crafting Excellence in Apparel Manufacturing"
     subtitle = "We combine traditional craftsmanship with modern technology that meet global standards."
     content = factory.Faker("paragraph", nb_sentences=5)
+    image = factory.LazyAttribute(
+        lambda x: cache_image(1920, 1080, keyword="factory")
+    )
+
+
+class HomeIntroductionFeatureFactory(BaseFactory):
+    class Meta:
+        model = HomeIntroductionFeature
+
+    introduction = factory.SubFactory(HomeIntroductionFactory)
+    icon = factory.Faker(
+        "random_element",
+        elements=[
+            "ph-check-circle",
+            "ph-rocket",
+            "ph-star",
+        ],
+    )
+    title = factory.Faker("sentence", nb_words=3)
+    description = factory.Faker("paragraph", nb_sentences=2)
 
 
 class FeaturedArticleFactory(BaseFactory):

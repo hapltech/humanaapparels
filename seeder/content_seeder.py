@@ -1,6 +1,7 @@
 import logging
 from django.db import transaction
 from hapl.models import ContactGroup
+
 from seeder.content_factories import (
     HomeCarouselSlideFactory,
     HomeIntroductionFactory,
@@ -19,6 +20,7 @@ from seeder.content_factories import (
     SocialFactory,
     CareerPositionFactory,
     NewsArticleFactory,
+    HomeIntroductionFeatureFactory,
 )
 
 
@@ -47,6 +49,7 @@ class HomeSeeder(Seeder):
         FeaturedClientFactory._meta.model.objects.all().delete()
         CompanyStatsFactory._meta.model.objects.all().delete()
         ServiceFactory._meta.model.objects.all().delete()
+        HomeIntroductionFeatureFactory._meta.model.objects.all().delete()
         logger.info("🧹 Home data cleaned.")
 
     @transaction.atomic
@@ -55,7 +58,8 @@ class HomeSeeder(Seeder):
             self.clean_data()
         logger.info("🌱 Seeding Home data...")
         HomeCarouselSlideFactory.create_batch(3)
-        HomeIntroductionFactory.create()
+        home_intro = HomeIntroductionFactory.create()
+        HomeIntroductionFeatureFactory.create_batch(3, introduction=home_intro)
         FeaturedArticleFactory.create_batch(3)
         FeaturedClientFactory.create_batch(10)
         CompanyStatsFactory.create_batch(4)
