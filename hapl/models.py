@@ -153,7 +153,7 @@ class Customer(BaseModel):
         CustomersSection, related_name="customers", on_delete=models.CASCADE, null=True
     )
     name = models.CharField(max_length=100)
-    logo = OptimizedImageField(upload_to="customers/")
+    logo = OptimizedImageField(upload_to="customers/", max_dimensions=(200, 200))
     url = models.URLField()
     is_featured = models.BooleanField(default=False, help_text="Display on home page")
 

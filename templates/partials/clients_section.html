@@ -8,9 +8,7 @@
   <!-- Grid -->
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
     {% for client in clients_data.clients %}
-      <div class="p-4 md:p-7 bg-card rounded-xl">
-        {% include "partials/client_logo.html" %}
-      </div>
+      <div class="p-4 flex items-center justify-center rounded-xl">{% include "partials/client_logo.html" %}</div>
     {% endfor %}
   </div>
   <!-- End Grid -->
