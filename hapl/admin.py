@@ -1,5 +1,5 @@
 from django.contrib import admin
-from unfold.admin import ModelAdmin, TabularInline
+from unfold.admin import ModelAdmin, StackedInline
 from unfold.contrib.forms.widgets import WysiwygWidget
 from django.db import models
 from hapl.models import (
@@ -34,7 +34,19 @@ from hapl.models import (
 )
 
 
-class BaseSectionAdmin(ModelAdmin):
+class BaseModelAdmin(ModelAdmin):
+    """Base admin class that hides tracking fields for all models"""
+
+    exclude = ("created_at", "updated_at", "created_by", "updated_by")
+
+
+class BaseInline(StackedInline):
+    """Base inline class that hides tracking fields"""
+
+    exclude = ("created_at", "updated_at", "created_by", "updated_by")
+
+
+class BaseSectionAdmin(BaseModelAdmin):
     """Base admin class for section models with title and subtitle"""
 
     fieldsets = (
@@ -50,7 +62,7 @@ class BaseSectionAdmin(ModelAdmin):
 # --- Home Page Sections ---
 
 
-class HomeCarouselSlideInline(TabularInline):
+class HomeCarouselSlideInline(BaseInline):
     model = HomeCarouselSlide
     extra = 1
 
@@ -61,12 +73,12 @@ class HomeHeroSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(HomeCarouselSlide)
-class HomeCarouselSlideAdmin(ModelAdmin):
+class HomeCarouselSlideAdmin(BaseModelAdmin):
     list_display = ("title", "is_active")
     list_filter = ("is_active",)
 
 
-class HomeIntroductionFeatureInline(TabularInline):
+class HomeIntroductionFeatureInline(BaseInline):
     model = HomeIntroductionFeature
     extra = 1
 
@@ -76,7 +88,6 @@ class HomeIntroductionSectionAdmin(BaseSectionAdmin):
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
     inlines = [HomeIntroductionFeatureInline]
 
-    # Override fieldsets instead of using fields
     fieldsets = (
         (
             "Section Settings",
@@ -94,11 +105,11 @@ class HomeIntroductionSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(HomeIntroductionFeature)
-class HomeIntroductionFeatureAdmin(ModelAdmin):
+class HomeIntroductionFeatureAdmin(BaseModelAdmin):
     list_display = ("title", "icon")
 
 
-class ServiceInline(TabularInline):
+class ServiceInline(BaseInline):
     model = Service
     extra = 1
 
@@ -109,12 +120,12 @@ class HomeServicesSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(Service)
-class ServiceAdmin(ModelAdmin):
+class ServiceAdmin(BaseModelAdmin):
     list_display = ("title", "icon")
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
 
 
-class CompanyStatsInline(TabularInline):
+class CompanyStatsInline(BaseInline):
     model = CompanyStats
     extra = 1
 
@@ -125,7 +136,7 @@ class HomeStatsSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(CompanyStats)
-class CompanyStatsAdmin(ModelAdmin):
+class CompanyStatsAdmin(BaseModelAdmin):
     list_display = ("title", "value", "icon")
 
 
@@ -134,7 +145,6 @@ class CompanyStatsAdmin(ModelAdmin):
 class AboutSectionAdmin(BaseSectionAdmin):
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
 
-    # Override fieldsets instead of using fields
     fieldsets = (
         (
             "Section Settings",
@@ -151,7 +161,7 @@ class AboutSectionAdmin(BaseSectionAdmin):
     )
 
 
-class TeamMemberInline(TabularInline):
+class TeamMemberInline(BaseInline):
     model = TeamMember
     extra = 1
 
@@ -162,12 +172,12 @@ class TeamSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(TeamMember)
-class TeamMemberAdmin(ModelAdmin):
+class TeamMemberAdmin(BaseModelAdmin):
     list_display = ("name", "position", "is_management")
     list_filter = ("is_management",)
 
 
-class FAQInline(TabularInline):
+class FAQInline(BaseInline):
     model = FAQ
     extra = 1
 
@@ -178,14 +188,14 @@ class FAQSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(FAQ)
-class FAQAdmin(ModelAdmin):
+class FAQAdmin(BaseModelAdmin):
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
 
 
 # --- Customers Page Sections ---
 
 
-class CustomerInline(TabularInline):
+class CustomerInline(BaseInline):
     model = Customer
     extra = 1
 
@@ -196,12 +206,12 @@ class CustomersSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(Customer)
-class CustomerAdmin(ModelAdmin):
+class CustomerAdmin(BaseModelAdmin):
     list_display = ("name", "is_featured")
     list_filter = ("is_featured",)
 
 
-class TestimonialInline(TabularInline):
+class TestimonialInline(BaseInline):
     model = Testimonial
     extra = 1
 
@@ -212,7 +222,7 @@ class TestimonialsSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(Testimonial)
-class TestimonialAdmin(ModelAdmin):
+class TestimonialAdmin(BaseModelAdmin):
     list_display = ("author", "position", "is_featured")
     list_filter = ("is_featured",)
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
@@ -224,58 +234,58 @@ class ContactSectionAdmin(BaseSectionAdmin):
     pass
 
 
-class ContactPhoneInline(TabularInline):
+class ContactPhoneInline(BaseInline):
     model = ContactPhone
     extra = 1
 
 
-class ContactEmailInline(TabularInline):
+class ContactEmailInline(BaseInline):
     model = ContactEmail
     extra = 1
 
 
 @admin.register(ContactData)
-class ContactDataAdmin(ModelAdmin):
+class ContactDataAdmin(BaseModelAdmin):
     inlines = [ContactPhoneInline, ContactEmailInline]
 
 
 @admin.register(ContactPhone)
-class ContactPhoneAdmin(ModelAdmin):
+class ContactPhoneAdmin(BaseModelAdmin):
     list_display = ("number", "type", "is_primary")
     list_filter = ("type", "is_primary")
 
 
 @admin.register(ContactEmail)
-class ContactEmailAdmin(ModelAdmin):
+class ContactEmailAdmin(BaseModelAdmin):
     list_display = ("email", "department", "is_primary")
     list_filter = ("is_primary",)
 
 
-class ContactMemberInline(TabularInline):
+class ContactMemberInline(BaseInline):
     model = ContactMember
     extra = 1
 
 
 @admin.register(ContactGroup)
-class ContactGroupAdmin(ModelAdmin):
+class ContactGroupAdmin(BaseModelAdmin):
     inlines = [ContactMemberInline]
 
 
 @admin.register(ContactMember)
-class ContactMemberAdmin(ModelAdmin):
+class ContactMemberAdmin(BaseModelAdmin):
     list_display = ("name", "position", "group")
     list_filter = ("group",)
 
 
 @admin.register(Social)
-class SocialAdmin(ModelAdmin):
+class SocialAdmin(BaseModelAdmin):
     list_display = ("name", "icon")
 
 
 # --- Career Page Sections ---
 
 
-class CareerPositionInline(TabularInline):
+class CareerPositionInline(BaseInline):
     model = CareerPosition
     extra = 1
 
@@ -286,7 +296,7 @@ class CareerSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(CareerPosition)
-class CareerPositionAdmin(ModelAdmin):
+class CareerPositionAdmin(BaseModelAdmin):
     list_display = ("title", "location", "department", "status")
     list_filter = ("location", "department", "status")
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
@@ -295,7 +305,7 @@ class CareerPositionAdmin(ModelAdmin):
 # --- News Page Sections ---
 
 
-class NewsArticleInline(TabularInline):
+class NewsArticleInline(BaseInline):
     model = NewsArticle
     extra = 1
 
@@ -306,7 +316,7 @@ class NewsSectionAdmin(BaseSectionAdmin):
 
 
 @admin.register(NewsArticle)
-class NewsArticleAdmin(ModelAdmin):
+class NewsArticleAdmin(BaseModelAdmin):
     list_display = ("title", "published_at", "category", "is_featured")
     list_filter = ("category", "is_featured", "published_at")
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
