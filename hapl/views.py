@@ -36,6 +36,12 @@ def home(request):
 
 
 def about(request):
+    faq = {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Get answers to common questions about our services",
+        "faqs": FAQ.objects.all(),
+    }
+
     return render(
         request,
         "www/about.html",
@@ -43,7 +49,7 @@ def about(request):
             "about": AboutData.objects.first(),
             "management": TeamMember.objects.filter(is_management=True),
             "team": TeamMember.objects.filter(is_management=False),
-            "faq": FAQ.objects.all(),
+            "faq": faq,
         },
     )
 
