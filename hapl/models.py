@@ -73,7 +73,9 @@ class Service(BaseModel):
     title = models.CharField(max_length=200)
     description = models.TextField()
     icon = models.CharField(max_length=50, help_text="Phosphor icon class")
-    image = OptimizedImageField(upload_to="services/", blank=True, null=True)
+    image = OptimizedImageField(
+        upload_to="services/", max_dimensions=((800, 800)), blank=True, null=True
+    )
 
     def __str__(self):
         return self.title
@@ -102,7 +104,7 @@ class AboutSection(BaseSection):
     """Main about section model"""
 
     content = models.TextField(null=True, blank=True)
-    image = OptimizedImageField(upload_to="about/")
+    image = OptimizedImageField(upload_to="about/", max_dimensions=(800, 800))
 
 
 class TeamSection(BaseSection):
@@ -117,7 +119,7 @@ class TeamMember(BaseModel):
     )
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
-    image = OptimizedImageField(upload_to="team/")
+    image = OptimizedImageField(upload_to="team/", max_dimensions=(400, 400))
     is_management = models.BooleanField(default=False)
 
     def __str__(self):
@@ -177,7 +179,9 @@ class Testimonial(BaseModel):
     content = models.TextField()
     author = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
-    company_logo = OptimizedImageField(upload_to="testimonials/")
+    company_logo = OptimizedImageField(
+        upload_to="testimonials/", max_dimensions=(100, 100)
+    )
     is_featured = models.BooleanField(default=False, help_text="Featured testimonial")
 
     def __str__(self):
@@ -260,7 +264,7 @@ class ContactMember(BaseModel):
     )
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
-    image = OptimizedImageField(upload_to="contact/members/")
+    image = OptimizedImageField(upload_to="contact/members/", max_dimensions=(400, 400))
     email = models.EmailField()
     phone = models.CharField(max_length=20)
 
@@ -321,7 +325,7 @@ class NewsArticle(BaseModel):
     title = models.CharField(max_length=200)
     excerpt = models.CharField(max_length=500)
     content = models.TextField(null=True, blank=True)
-    image = OptimizedImageField(upload_to="news/")
+    image = OptimizedImageField(upload_to="news/", max_dimensions=(1000, 1000))
     published_at = models.DateField()
     category = models.CharField(max_length=100)
     is_featured = models.BooleanField(default=False, help_text="Feature on home page")
