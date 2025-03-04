@@ -11,7 +11,7 @@
              aria-label="Services"
              role="tablist"
              aria-orientation="vertical">
-          {% for service in services %}
+          {% for service in services.items %}
             <button type="button"
                     class="hs-tab-active:bg-card hs-tab-active:shadow-md border border-transparent hs-tab-active:border-foreground/10 text-start hover:bg-accent/20 p-4 md:p-5 rounded-xl {% if forloop.first %}active{% endif %}"
                     id="service-tab-{{ service.id }}"
@@ -35,7 +35,7 @@
         <div class="relative">
           <!-- Tab Content -->
           <div>
-            {% for service in services %}
+            {% for service in services.items %}
               <div id="service-content-{{ service.id }}"
                    role="tabpanel"
                    aria-labelledby="service-tab-{{ service.id }}"

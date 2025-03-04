@@ -3,7 +3,7 @@
        class="relative">
     <div class="hs-carousel relative overflow-hidden w-full min-h-[500px] sm:min-h-[600px] bg-card">
       <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-        {% for slide in hero_slides %}
+        {% for slide in hero.slides %}
           <div class="hs-carousel-slide relative w-full">
             <img src="{{ slide.image.url }}"
                  alt="{{ slide.title|default:'Slide Image' }}"
