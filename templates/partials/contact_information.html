@@ -80,14 +80,14 @@
               {% if member.email %}
                 <a href="mailto:{{ member.email }}"
                    class="flex items-center gap-x-2 text-sm text-foreground/60 hover:text-primary transition">
-                  <i class="ph ph-envelope"></i>
+                  <i class="ph ph-duotone ph-envelope"></i>
                   <span>{{ member.email }}</span>
                 </a>
               {% endif %}
               {% if member.phone %}
                 <a href="tel:{{ member.phone|cut:' ' }}"
                    class="flex items-center gap-x-2 text-sm text-foreground/60 hover:text-primary transition">
-                  <i class="ph ph-phone"></i>
+                  <i class="ph ph-duotone ph-phone"></i>
                   <span>{{ member.phone }}</span>
                 </a>
               {% endif %}

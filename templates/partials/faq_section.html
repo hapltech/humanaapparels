@@ -16,8 +16,8 @@
             <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-foreground transition hover:text-foreground/70"
                     aria-controls="faq-accordion-content-{{ item.id }}">
               {{ item.question }}
-              <i class="ph ph-caret-down hs-accordion-active:hidden block shrink-0 size-5 text-foreground/70 group-hover:text-foreground/50"></i>
-              <i class="ph ph-caret-up hs-accordion-active:block hidden shrink-0 size-5 text-foreground/70 group-hover:text-foreground/50"></i>
+              <i class="ph ph-duotone ph-caret-down hs-accordion-active:hidden block shrink-0 size-5 text-foreground/70 group-hover:text-foreground/50"></i>
+              <i class="ph ph-duotone ph-caret-up hs-accordion-active:block hidden shrink-0 size-5 text-foreground/70 group-hover:text-foreground/50"></i>
             </button>
             <div id="faq-accordion-content-{{ item.id }}"
                  class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {% if not forloop.first %}hidden{% endif %}"

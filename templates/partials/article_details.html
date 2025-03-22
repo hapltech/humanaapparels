@@ -7,7 +7,7 @@
           <!-- Back Link -->
           <a class="inline-flex items-center gap-x-1.5 text-sm text-foreground/60 decoration-2 hover:text-primary focus:outline-none"
              href="{% url 'news' %}">
-            <i class="ph ph-arrow-left"></i>
+            <i class="ph ph-duotone ph-arrow-left"></i>
             Back to News
           </a>
           <!-- Header -->
@@ -59,19 +59,19 @@
                target="_blank"
                rel="noopener noreferrer"
                class="inline-flex justify-center items-center size-10 text-foreground/60 hover:text-primary rounded-lg border border-border hover:border-primary transition">
-              <i class="ph ph-twitter-logo text-xl"></i>
+              <i class="ph ph-duotone ph-twitter-logo text-xl"></i>
             </a>
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
                target="_blank"
                rel="noopener noreferrer"
                class="inline-flex justify-center items-center size-10 text-foreground/60 hover:text-primary rounded-lg border border-border hover:border-primary transition">
-              <i class="ph ph-facebook-logo text-xl"></i>
+              <i class="ph ph-duotone ph-facebook-logo text-xl"></i>
             </a>
             <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ article.title|urlencode }}"
                target="_blank"
                rel="noopener noreferrer"
                class="inline-flex justify-center items-center size-10 text-foreground/60 hover:text-primary rounded-lg border border-border hover:border-primary transition">
-              <i class="ph ph-linkedin-logo text-xl"></i>
+              <i class="ph ph-duotone ph-linkedin-logo text-xl"></i>
             </a>
           </div>
         </div>
