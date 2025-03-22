@@ -1,4 +1,6 @@
 asgiref==3.8.1
+certifi==2025.1.31
+charset-normalizer==3.4.1
 click==8.1.8
 colorama==0.4.6
 cssbeautifier==1.15.1
@@ -14,6 +16,7 @@ djlint==1.36.4
 EditorConfig==0.17.0
 factory_boy==3.3.1
 Faker==35.0.0
+idna==3.10
 inflection==0.5.1
 iniconfig==2.0.0
 jsbeautifier==1.15.1
@@ -32,8 +35,10 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 PyYAML==6.0.2
 regex==2024.11.6
+requests==2.32.3
 six==1.17.0
 sqlparse==0.5.3
 tqdm==4.67.1
 typing_extensions==4.12.2
 tzdata==2025.1
+urllib3==2.3.0
