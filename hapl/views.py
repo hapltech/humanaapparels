@@ -291,4 +291,26 @@ def sustainability(request):
 
 def gallery(request):
     gallery_data = generate_gallery_data()
-    return render(request, "www/gallery.html", gallery_data)
+
+    images_by_section = {}
+    for image in gallery_data["images"]:
+        section = image["section"]
+        if section not in images_by_section:
+            images_by_section[section] = []
+        images_by_section[section].append(image)
+
+    videos_by_section = {}
+    for video in gallery_data["videos"]:
+        section = video["section"]
+        if section not in videos_by_section:
+            videos_by_section[section] = []
+        videos_by_section[section].append(video)
+
+    context = {
+        "gallery_data": {
+            "images_by_section": images_by_section,
+            "videos_by_section": videos_by_section,
+        }
+    }
+
+    return render(request, "www/gallery.html", context)

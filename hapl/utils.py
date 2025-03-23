@@ -1,5 +1,5 @@
 from faker import Faker
-
+import random
 
 fake = Faker()
 
@@ -64,12 +64,15 @@ def generate_sustainability_data():
             {
                 "title": fake.sentence(nb_words=4),
                 "description": fake.paragraph(nb_sentences=2),
-                "image": fake.image_url(width=600, height=400),
+                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/600/400",
             }
             for _ in range(2)
         ],
         "certificates": [
-            {"name": fake.company(), "image": fake.image_url(width=200, height=100)}
+            {
+                "name": fake.company(),
+                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/200/100",
+            }
             for _ in range(2)
         ],
     }
@@ -81,18 +84,22 @@ def generate_gallery_data():
         "images": [
             {
                 "caption": fake.sentence(nb_words=3),
-                "url": fake.image_url(width=400, height=300),
-                "section": fake.word().capitalize(),
+                "url": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/{random.randint(400, 800)}/{random.randint(300, 600)}",
+                "section": fake.random_element(
+                    elements=("Product", "Culture", "Team", "Events")
+                ),
             }
-            for _ in range(2)
+            for _ in range(20)
         ],
         "videos": [
             {
                 "caption": fake.sentence(nb_words=3),
-                "youtube_url": "https://www.youtube.com/embed/your_youtube_video_id",
-                "section": fake.word().capitalize(),
+                "youtube_url": f"https://www.youtube.com/embed/{fake.lexify(text='???????????')}",
+                "section": fake.random_element(
+                    elements=("Product", "Culture", "Team", "Events")
+                ),
             }
-            for _ in range(2)
+            for _ in range(5)
         ],
     }
     return gallery_data
