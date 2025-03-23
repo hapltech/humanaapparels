@@ -281,12 +281,14 @@ def products(request):
 
 def complience(request):
     complience_data = generate_complience_data()
-    return render(request, "www/complience.html", complience_data)
+    return render(request, "www/complience.html", {"complience_data": complience_data})
 
 
 def sustainability(request):
     sustainability_data = generate_sustainability_data()
-    return render(request, "www/sustainability.html", sustainability_data)
+    return render(
+        request, "www/sustainability.html", {"sustainability_data": sustainability_data}
+    )
 
 
 def gallery(request):

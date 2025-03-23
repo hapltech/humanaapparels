@@ -1,0 +1,75 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Compliance{% endblock %}
+{% block content %}
+  <div class="max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    {% for section in complience_data.sections %}
+      <section class="mb-16 pb-16 border-b border-border last:border-0">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {% if forloop.counter|divisibleby:2 %}
+            <div class="md:order-2">
+              <img src="{{ section.image }}"
+                   alt="{{ section.title }}"
+                   class="w-full h-auto rounded-3xl sm:rounded-tl-none sm:rounded-br-none object-cover shadow-md hover:shadow-lg transition-shadow duration-300">
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold mb-4 pb-2 inline-block relative after:content-[''] after:absolute after:w-full after:h-1 after:bg-gradient-to-r after:from-primary after:to-accent after:bottom-0 after:left-0 transition-all duration-300 hover:after:h-2">
+                {{ section.title }}
+              </h2>
+              <p class="text-foreground/80 leading-relaxed">{{ section.description }}</p>
+            </div>
+          {% else %}
+            <div>
+              <img src="{{ section.image }}"
+                   alt="{{ section.title }}"
+                   class="w-full h-auto rounded-3xl sm:rounded-tl-none sm:rounded-br-none object-cover shadow-md hover:shadow-lg transition-shadow duration-300">
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold mb-4 pb-2 inline-block relative after:content-[''] after:absolute after:w-full after:h-1 after:bg-gradient-to-r after:from-primary after:to-accent after:bottom-0 after:left-0 transition-all duration-300 hover:after:h-2">
+                {{ section.title }}
+              </h2>
+              <p class="text-foreground/80 leading-relaxed">{{ section.description }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    {% endfor %}
+    <div class="pt-16 mb-12 text-4xl font-bold flex items-center before:flex-1 before:border-t before:border-border before:me-6 after:flex-1 after:border-t after:border-border after:ms-6">
+      Certifications
+    </div>
+    <!-- Slider -->
+    <div data-hs-carousel='{ "loadingClasses": "opacity-0", "dotsItemClasses": "hs-carousel-active:bg-primary hs-carousel-active:border-primary size-3 border border-border/30 rounded-full cursor-pointer", "isInfiniteLoop": true, "slidesQty": { "xs": 1, "md": 3, "lg": 5 } }'
+         class="relative mb-16">
+      <div class="hs-carousel w-full overflow-hidden rounded-lg h-48">
+        <div class="hs-carousel-body h-full relative flex flex-nowrap opacity-0 transition-transform duration-700 hs-carousel:dragging:transition-none">
+          {% for certificate in complience_data.certificates %}
+            <div class="hs-carousel-slide w-full h-full flex-shrink-0">
+              <div class="flex flex-col items-center justify-center h-full p-4">
+                <img src="{{ certificate.image }}"
+                     alt="{{ certificate.name }}"
+                     class="h-24 object-contain mb-3 rounded-xl">
+                <span class="text-sm text-foreground/80 text-center">{{ certificate.name }}</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <button type="button"
+              class="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-10 h-full text-foreground hover:bg-foreground/5 focus:outline-none rounded-s-lg">
+        <span class="text-2xl" aria-hidden="true">
+          <i class="ph ph-duotone ph-caret-left"></i>
+        </span>
+        <span class="sr-only">Previous</span>
+      </button>
+      <button type="button"
+              class="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-10 h-full text-foreground hover:bg-foreground/5 focus:outline-none rounded-e-lg">
+        <span class="sr-only">Next</span>
+        <span class="text-2xl" aria-hidden="true">
+          <i class="ph ph-duotone ph-caret-right"></i>
+        </span>
+      </button>
+      <div class="hs-carousel-pagination flex justify-center absolute bottom-2 start-0 end-0 gap-x-1"></div>
+    </div>
+    <!-- End Slider -->
+  </div>
+{% endblock %}

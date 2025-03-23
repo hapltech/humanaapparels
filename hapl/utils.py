@@ -45,14 +45,17 @@ def generate_complience_data():
         "sections": [
             {
                 "title": fake.sentence(nb_words=4),
-                "description": fake.paragraph(nb_sentences=2),
-                "image": fake.image_url(width=600, height=400),
+                "description": fake.paragraph(nb_sentences=10),
+                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/600/400",
             }
-            for _ in range(2)
+            for _ in range(5)
         ],
         "certificates": [
-            {"name": fake.company(), "image": fake.image_url(width=200, height=100)}
-            for _ in range(2)
+            {
+                "name": fake.company(),
+                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/200",
+            }
+            for _ in range(10)
         ],
     }
     return complience_data
@@ -63,17 +66,17 @@ def generate_sustainability_data():
         "sections": [
             {
                 "title": fake.sentence(nb_words=4),
-                "description": fake.paragraph(nb_sentences=2),
+                "description": fake.paragraph(nb_sentences=10),
                 "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/600/400",
             }
-            for _ in range(2)
+            for _ in range(5)
         ],
         "certificates": [
             {
                 "name": fake.company(),
-                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/200/100",
+                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/200",
             }
-            for _ in range(2)
+            for _ in range(10)
         ],
     }
     return sustainability_data
