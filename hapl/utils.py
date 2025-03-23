@@ -8,7 +8,7 @@ def generate_products_data():
     products_data = {
         "carousel": [
             {
-                "image": fake.image_url(width=800, height=400),
+                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/800/600",
                 "alt": fake.text(max_nb_chars=20),
             }
             for _ in range(3)
@@ -16,8 +16,8 @@ def generate_products_data():
         "sections": [
             {
                 "title": fake.sentence(nb_words=4),
-                "description": fake.paragraph(nb_sentences=2),
-                "image": fake.image_url(width=600, height=400),
+                "description": fake.paragraph(nb_sentences=5),
+                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/600/400",
             }
             for _ in range(5)
         ],
@@ -28,7 +28,7 @@ def generate_products_data():
                     {
                         "gender": fake.random_element(elements=("Male", "Female")),
                         "name": fake.sentence(nb_words=3),
-                        "image": fake.image_url(width=300, height=200),
+                        "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/300",
                         "buyer": fake.company(),
                     }
                     for _ in range(10)
