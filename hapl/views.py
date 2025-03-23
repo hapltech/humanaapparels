@@ -263,3 +263,32 @@ def career(request):
             }
         },
     )
+
+
+# TODO: Use actual data instead of mock data
+from hapl.utils import (
+    generate_products_data,
+    generate_complience_data,
+    generate_sustainability_data,
+    generate_gallery_data,
+)
+
+
+def products(request):
+    products_data = generate_products_data()
+    return render(request, "www/products.html", products_data)
+
+
+def complience(request):
+    complience_data = generate_complience_data()
+    return render(request, "www/complience.html", complience_data)
+
+
+def sustainability(request):
+    sustainability_data = generate_sustainability_data()
+    return render(request, "www/sustainability.html", sustainability_data)
+
+
+def gallery(request):
+    gallery_data = generate_gallery_data()
+    return render(request, "www/gallery.html", gallery_data)
