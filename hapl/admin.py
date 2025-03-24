@@ -87,12 +87,10 @@ class HomeHeroSectionAdmin(BaseModelAdmin):
     inlines = [HomeCarouselSlideInline]
 
     def has_add_permission(self, request):
-        # Restrict adding new instances
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        # Restrict deleting the instance
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(HomeCarouselSlide)
@@ -127,10 +125,10 @@ class HomeIntroductionSectionAdmin(BaseSectionAdmin):
     )
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(HomeIntroductionFeature)
@@ -148,10 +146,10 @@ class HomeServicesSectionAdmin(BaseSectionAdmin):
     inlines = [ServiceInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(Service)
@@ -170,10 +168,10 @@ class HomeStatsSectionAdmin(BaseSectionAdmin):
     inlines = [CompanyStatsInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(CompanyStats)
@@ -202,10 +200,10 @@ class AboutSectionAdmin(BaseSectionAdmin):
     )
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 class TeamMemberInline(BaseInline):
@@ -218,10 +216,10 @@ class TeamSectionAdmin(BaseSectionAdmin):
     inlines = [TeamMemberInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(TeamMember)
@@ -240,10 +238,10 @@ class FAQSectionAdmin(BaseSectionAdmin):
     inlines = [FAQInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(FAQ)
@@ -264,10 +262,10 @@ class CustomersSectionAdmin(BaseSectionAdmin):
     inlines = [CustomerInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(Customer)
@@ -286,10 +284,10 @@ class TestimonialsSectionAdmin(BaseSectionAdmin):
     inlines = [TestimonialInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(Testimonial)
@@ -303,10 +301,10 @@ class TestimonialAdmin(BaseModelAdmin):
 @admin.register(ContactSection)
 class ContactSectionAdmin(BaseSectionAdmin):
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 class ContactPhoneInline(BaseInline):
@@ -370,10 +368,10 @@ class CareerSectionAdmin(BaseSectionAdmin):
     inlines = [CareerPositionInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(CareerPosition)
@@ -396,10 +394,10 @@ class NewsSectionAdmin(BaseSectionAdmin):
     inlines = [NewsArticleInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(NewsArticle)
@@ -430,10 +428,10 @@ class ProductsPageAdmin(BaseSectionAdmin):
     inlines = [ProductCarouselSlideInline, ProductSectionInline, ProductCategoryInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(ProductCarouselSlide)
@@ -484,10 +482,10 @@ class CompliancePageAdmin(BaseSectionAdmin):
     inlines = [ComplianceSectionInline, ComplianceCertificateInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(ComplianceSection)
@@ -520,10 +518,10 @@ class SustainabilityPageAdmin(BaseSectionAdmin):
     inlines = [SustainabilitySectionInline, SustainabilityCertificateInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 @admin.register(SustainabilitySection)
@@ -550,10 +548,10 @@ class GalleryPageAdmin(BaseSectionAdmin):
     inlines = [GallerySectionInline]
 
     def has_add_permission(self, request):
-        return False
+        return True if request.user.is_superuser else False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True if request.user.is_superuser else False
 
 
 class GalleryImageInline(BaseInline):
