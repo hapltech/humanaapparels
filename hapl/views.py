@@ -28,11 +28,25 @@ from hapl.models import (
     NewsSection,
     NewsArticle,
     Social,
+    ProductsPage,
+    ProductCarouselSlide,
+    ProductSection,
+    ProductCategory,
+    Product,
+    CompliancePage,
+    ComplianceSection,
+    ComplianceCertificate,
+    SustainabilityPage,
+    SustainabilitySection,
+    SustainabilityCertificate,
+    GalleryPage,
+    GallerySection,
+    GalleryImage,
+    GalleryVideo,
 )
 
 
 def home(request):
-    hero_section = HomeHeroSection.objects.first()
     intro_section = HomeIntroductionSection.objects.first()
     stats_section = HomeStatsSection.objects.first()
     services_section = HomeServicesSection.objects.first()
@@ -42,10 +56,7 @@ def home(request):
         "www/home.html",
         {
             "hero": {
-                "title": (
-                    hero_section.title if hero_section else "Welcome to Humana Apparels"
-                ),
-                "subtitle": hero_section.subtitle if hero_section else None,
+                "title": "Welcome to Humana Apparels",
                 "slides": HomeCarouselSlide.objects.filter(is_active=True),
             },
             "articles": NewsArticle.objects.filter(is_featured=True),
@@ -265,48 +276,122 @@ def career(request):
     )
 
 
-# TODO: Use actual data instead of mock data
-from hapl.utils import (
-    generate_products_data,
-    generate_complience_data,
-    generate_sustainability_data,
-    generate_gallery_data,
-)
-
-
 def products(request):
-    products_data = generate_products_data()
-    return render(request, "www/products.html", products_data)
+    products_page = ProductsPage.objects.first()
+
+    context = {
+        "carousel": ProductCarouselSlide.objects.filter(page=products_page),
+        "sections": ProductSection.objects.filter(page=products_page),
+        "product_portfolio": [],
+    }
+
+    # Build the product portfolio structure
+    for category in ProductCategory.objects.filter(page=products_page):
+        portfolio_item = {"section": category.name, "products": []}
+
+        for product in Product.objects.filter(category=category):
+            portfolio_item["products"].append(
+                {
+                    "gender": product.gender,
+                    "name": product.name,
+                    "image": product.image.url,
+                    "buyer": product.buyer,
+                }
+            )
+
+        context["product_portfolio"].append(portfolio_item)
+
+    return render(request, "www/products.html", context)
 
 
 def complience(request):
-    complience_data = generate_complience_data()
+    compliance_page = CompliancePage.objects.first()
+
+    complience_data = {"sections": [], "certificates": []}
+
+    # Add sections
+    for section in ComplianceSection.objects.filter(page=compliance_page):
+        complience_data["sections"].append(
+            {
+                "title": section.title,
+                "description": section.description,
+                "image": section.image.url,
+            }
+        )
+
+    # Add certificates
+    for certificate in ComplianceCertificate.objects.filter(page=compliance_page):
+        complience_data["certificates"].append(
+            {"name": certificate.name, "image": certificate.image.url}
+        )
+
     return render(request, "www/complience.html", {"complience_data": complience_data})
 
 
 def sustainability(request):
-    sustainability_data = generate_sustainability_data()
+    sustainability_page = SustainabilityPage.objects.first()
+
+    sustainability_data = {"sections": [], "certificates": []}
+
+    # Add sections
+    for section in SustainabilitySection.objects.filter(page=sustainability_page):
+        sustainability_data["sections"].append(
+            {
+                "title": section.title,
+                "description": section.description,
+                "image": section.image.url,
+            }
+        )
+
+    # Add certificates
+    for certificate in SustainabilityCertificate.objects.filter(
+        page=sustainability_page
+    ):
+        sustainability_data["certificates"].append(
+            {"name": certificate.name, "image": certificate.image.url}
+        )
+
     return render(
         request, "www/sustainability.html", {"sustainability_data": sustainability_data}
     )
 
 
 def gallery(request):
-    gallery_data = generate_gallery_data()
+    gallery_page = GalleryPage.objects.first()
 
+    # Initialize dictionaries to store images and videos by section
     images_by_section = {}
-    for image in gallery_data["images"]:
-        section = image["section"]
-        if section not in images_by_section:
-            images_by_section[section] = []
-        images_by_section[section].append(image)
-
     videos_by_section = {}
-    for video in gallery_data["videos"]:
-        section = video["section"]
-        if section not in videos_by_section:
-            videos_by_section[section] = []
-        videos_by_section[section].append(video)
+
+    # Organize images by section
+    for section in GallerySection.objects.filter(page=gallery_page):
+        section_name = section.name
+
+        # Get images for this section
+        if section_name not in images_by_section:
+            images_by_section[section_name] = []
+
+        for image in GalleryImage.objects.filter(section=section):
+            images_by_section[section_name].append(
+                {
+                    "caption": image.caption,
+                    "url": image.image.url,
+                    "section": section_name,
+                }
+            )
+
+        # Get videos for this section
+        if section_name not in videos_by_section:
+            videos_by_section[section_name] = []
+
+        for video in GalleryVideo.objects.filter(section=section):
+            videos_by_section[section_name].append(
+                {
+                    "caption": video.caption,
+                    "youtube_url": video.youtube_url,
+                    "section": section_name,
+                }
+            )
 
     context = {
         "gallery_data": {

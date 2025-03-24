@@ -17,7 +17,7 @@ class BaseSection(BaseModel):
 
 
 # --- --- Home Page Models --- ---
-class HomeHeroSection(BaseSection):
+class HomeHeroSection(BaseModel):
     """Section model for home page hero/carousel"""
 
     pass
@@ -335,3 +335,185 @@ class NewsArticle(BaseModel):
 
     def __str__(self):
         return self.title
+
+
+# --- Products Page Models ---
+class ProductsPage(BaseSection):
+    """Main products page model"""
+
+    pass
+
+
+class ProductCarouselSlide(BaseModel):
+    """Carousel slides for products page"""
+
+    page = models.ForeignKey(
+        ProductsPage, related_name="carousel_slides", on_delete=models.CASCADE
+    )
+    image = OptimizedImageField(upload_to="products/carousel/")
+    alt = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.alt
+
+
+class ProductSection(BaseModel):
+    """Product sections with text and image"""
+
+    page = models.ForeignKey(
+        ProductsPage, related_name="sections", on_delete=models.CASCADE
+    )
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = OptimizedImageField(upload_to="products/sections/")
+    after_products = models.BooleanField(
+        default=False, help_text="Display this section after the product portfolio"
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class ProductCategory(BaseModel):
+    """Product categories (e.g., Jackets, Pants)"""
+
+    page = models.ForeignKey(
+        ProductsPage, related_name="categories", on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Product(BaseModel):
+    """Individual product model"""
+
+    category = models.ForeignKey(
+        ProductCategory, related_name="products", on_delete=models.CASCADE
+    )
+    gender = models.CharField(
+        max_length=20,
+        choices=(("Male", "Male"), ("Female", "Female")),
+        null=True,
+        blank=True,
+    )
+    name = models.CharField(max_length=200)
+    image = OptimizedImageField(upload_to="products/items/")
+    buyer = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+# --- Compliance Page Models ---
+class CompliancePage(BaseSection):
+    """Main compliance page model"""
+
+    pass
+
+
+class ComplianceSection(BaseModel):
+    """Compliance information sections"""
+
+    page = models.ForeignKey(
+        CompliancePage, related_name="sections", on_delete=models.CASCADE
+    )
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = OptimizedImageField(upload_to="compliance/sections/")
+
+    def __str__(self):
+        return self.title
+
+
+class ComplianceCertificate(BaseModel):
+    """Certificates for compliance page"""
+
+    page = models.ForeignKey(
+        CompliancePage, related_name="certificates", on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=200)
+    image = OptimizedImageField(upload_to="compliance/certificates/")
+
+    def __str__(self):
+        return self.name
+
+
+# --- Sustainability Page Models ---
+class SustainabilityPage(BaseSection):
+    """Main sustainability page model"""
+
+    pass
+
+
+class SustainabilitySection(BaseModel):
+    """Sustainability information sections"""
+
+    page = models.ForeignKey(
+        SustainabilityPage, related_name="sections", on_delete=models.CASCADE
+    )
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = OptimizedImageField(upload_to="sustainability/sections/")
+
+    def __str__(self):
+        return self.title
+
+
+class SustainabilityCertificate(BaseModel):
+    """Certificates for sustainability page"""
+
+    page = models.ForeignKey(
+        SustainabilityPage, related_name="certificates", on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=200)
+    image = OptimizedImageField(upload_to="sustainability/certificates/")
+
+    def __str__(self):
+        return self.name
+
+
+# --- Gallery Page Models ---
+class GalleryPage(BaseSection):
+    """Main gallery page model"""
+
+    pass
+
+
+class GallerySection(BaseModel):
+    """Gallery sections (e.g., Product, Culture, Team, Events)"""
+
+    page = models.ForeignKey(
+        GalleryPage, related_name="sections", on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class GalleryImage(BaseModel):
+    """Images for gallery page"""
+
+    section = models.ForeignKey(
+        GallerySection, related_name="images", on_delete=models.CASCADE
+    )
+    caption = models.CharField(max_length=200)
+    image = OptimizedImageField(upload_to="gallery/images/")
+
+    def __str__(self):
+        return self.caption
+
+
+class GalleryVideo(BaseModel):
+    """Videos for gallery page"""
+
+    section = models.ForeignKey(
+        GallerySection, related_name="videos", on_delete=models.CASCADE
+    )
+    caption = models.CharField(max_length=200)
+    youtube_url = models.URLField(help_text="YouTube embed URL")
+
+    def __str__(self):
+        return self.caption

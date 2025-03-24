@@ -10,7 +10,7 @@
         <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
           {% for slide in carousel %}
             <div class="hs-carousel-slide relative w-full">
-              <img src="{{ slide.image }}"
+              <img src="{{ slide.image.url }}"
                    alt="{{ slide.alt }}"
                    class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
@@ -46,7 +46,7 @@
             </h2>
             <p class="text-foreground/80 leading-relaxed mb-10">{{ section.description }}</p>
             <div class="w-full max-w-2xl">
-              <img src="{{ section.image }}"
+              <img src="{{ section.image.url }}"
                    alt="{{ section.title }}"
                    class="w-full h-auto rounded-3xl object-cover shadow-md hover:shadow-lg transition-shadow duration-300">
             </div>
@@ -190,7 +190,7 @@
             </h2>
             <p class="text-foreground/80 leading-relaxed mb-10">{{ section.description }}</p>
             <div class="w-full max-w-2xl">
-              <img src="{{ section.image }}"
+              <img src="{{ section.image.url }}"
                    alt="{{ section.title }}"
                    class="w-full h-auto rounded-3xl object-cover shadow-md hover:shadow-lg transition-shadow duration-300">
             </div>

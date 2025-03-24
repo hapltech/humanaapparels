@@ -1,3 +1,4 @@
+import random
 import logging
 from django.db import transaction
 from seeder.content_factories import (
@@ -29,6 +30,21 @@ from seeder.content_factories import (
     SocialFactory,
     CareerPositionFactory,
     NewsArticleFactory,
+    ProductsPageFactory,
+    ProductCarouselSlideFactory,
+    ProductSectionFactory,
+    ProductCategoryFactory,
+    ProductFactory,
+    CompliancePageFactory,
+    ComplianceSectionFactory,
+    ComplianceCertificateFactory,
+    SustainabilityPageFactory,
+    SustainabilitySectionFactory,
+    SustainabilityCertificateFactory,
+    GalleryPageFactory,
+    GallerySectionFactory,
+    GalleryImageFactory,
+    GalleryVideoFactory,
 )
 
 
@@ -252,3 +268,137 @@ class NewsSeeder(Seeder):
         NewsArticleFactory.create_batch(2, section=news_section, is_featured=True)
 
         logger.info("✅ News data seeded.")
+
+
+class ProductsSeeder(Seeder):
+    def clean_data(self):
+        # Clean section models first
+        ProductsPageFactory._meta.model.objects.all().delete()
+
+        # Then clean content models
+        ProductCarouselSlideFactory._meta.model.objects.all().delete()
+        ProductSectionFactory._meta.model.objects.all().delete()
+        ProductCategoryFactory._meta.model.objects.all().delete()
+        ProductFactory._meta.model.objects.all().delete()
+
+        logger.info("🧹 Products data cleaned.")
+
+    @transaction.atomic
+    def run(self):
+        if self.clean:
+            self.clean_data()
+        logger.info("🌱 Seeding Products data...")
+
+        # Create main page
+        products_page = ProductsPageFactory.create()
+
+        # Create carousel slides
+        ProductCarouselSlideFactory.create_batch(3, page=products_page)
+
+        # Create sections (some before, some after products)
+        ProductSectionFactory.create_batch(3, page=products_page, after_products=False)
+        ProductSectionFactory.create_batch(2, page=products_page, after_products=True)
+
+        # Create product categories and products
+        for category_name in ["Jackets", "Pants", "Shirts", "Denim"]:
+            category = ProductCategoryFactory.create(
+                page=products_page, name=category_name
+            )
+            # Create 5-10 products for each category
+            product_count = random.randint(5, 10)
+            ProductFactory.create_batch(product_count, category=category)
+
+        logger.info("✅ Products data seeded.")
+
+
+class ComplianceSeeder(Seeder):
+    def clean_data(self):
+        # Clean section models first
+        CompliancePageFactory._meta.model.objects.all().delete()
+
+        # Then clean content models
+        ComplianceSectionFactory._meta.model.objects.all().delete()
+        ComplianceCertificateFactory._meta.model.objects.all().delete()
+
+        logger.info("🧹 Compliance data cleaned.")
+
+    @transaction.atomic
+    def run(self):
+        if self.clean:
+            self.clean_data()
+        logger.info("🌱 Seeding Compliance data...")
+
+        # Create main page
+        compliance_page = CompliancePageFactory.create()
+
+        # Create content sections
+        ComplianceSectionFactory.create_batch(5, page=compliance_page)
+
+        # Create certificates
+        ComplianceCertificateFactory.create_batch(7, page=compliance_page)
+
+        logger.info("✅ Compliance data seeded.")
+
+
+class SustainabilitySeeder(Seeder):
+    def clean_data(self):
+        # Clean section models first
+        SustainabilityPageFactory._meta.model.objects.all().delete()
+
+        # Then clean content models
+        SustainabilitySectionFactory._meta.model.objects.all().delete()
+        SustainabilityCertificateFactory._meta.model.objects.all().delete()
+
+        logger.info("🧹 Sustainability data cleaned.")
+
+    @transaction.atomic
+    def run(self):
+        if self.clean:
+            self.clean_data()
+        logger.info("🌱 Seeding Sustainability data...")
+
+        # Create main page
+        sustainability_page = SustainabilityPageFactory.create()
+
+        # Create content sections
+        SustainabilitySectionFactory.create_batch(5, page=sustainability_page)
+
+        # Create certificates
+        SustainabilityCertificateFactory.create_batch(5, page=sustainability_page)
+
+        logger.info("✅ Sustainability data seeded.")
+
+
+class GallerySeeder(Seeder):
+    def clean_data(self):
+        # Clean section models first
+        GalleryPageFactory._meta.model.objects.all().delete()
+
+        # Then clean content models
+        GallerySectionFactory._meta.model.objects.all().delete()
+        GalleryImageFactory._meta.model.objects.all().delete()
+        GalleryVideoFactory._meta.model.objects.all().delete()
+
+        logger.info("🧹 Gallery data cleaned.")
+
+    @transaction.atomic
+    def run(self):
+        if self.clean:
+            self.clean_data()
+        logger.info("🌱 Seeding Gallery data...")
+
+        # Create main page
+        gallery_page = GalleryPageFactory.create()
+
+        # Create gallery sections
+        sections = ["Products", "Factory", "Team", "Events"]
+        for section_name in sections:
+            section = GallerySectionFactory.create(page=gallery_page, name=section_name)
+
+            # Create images for each section
+            GalleryImageFactory.create_batch(8, section=section)
+
+            # Create videos for each section (fewer videos than images)
+            GalleryVideoFactory.create_batch(2, section=section)
+
+        logger.info("✅ Gallery data seeded.")

@@ -30,6 +30,21 @@ from hapl.models import (
     Social,
     CareerPosition,
     NewsArticle,
+    ProductsPage,
+    ProductCarouselSlide,
+    ProductSection,
+    ProductCategory,
+    Product,
+    CompliancePage,
+    ComplianceSection,
+    ComplianceCertificate,
+    SustainabilityPage,
+    SustainabilitySection,
+    SustainabilityCertificate,
+    GalleryPage,
+    GallerySection,
+    GalleryImage,
+    GalleryVideo,
 )
 
 
@@ -56,12 +71,9 @@ class BaseSectionFactory(BaseFactory):
         abstract = True
 
 
-class HomeHeroSectionFactory(BaseSectionFactory):
+class HomeHeroSectionFactory(BaseFactory):
     class Meta:
         model = HomeHeroSection
-
-    title = "Welcome to Humana Apparels"
-    subtitle = "Excellence in Sustainable Apparel Manufacturing"
 
 
 class HomeIntroductionSectionFactory(BaseSectionFactory):
@@ -379,4 +391,158 @@ class NewsArticleFactory(BaseFactory):
     is_featured = factory.Faker("boolean", chance_of_getting_true=25)
     article_url = factory.LazyFunction(
         lambda: fake.url() if fake.boolean(chance_of_getting_true=30) else None
+    )
+
+
+class ProductsPageFactory(BaseSectionFactory):
+    class Meta:
+        model = ProductsPage
+
+    title = "Our Products"
+    subtitle = "Explore our diverse range of high-quality apparel products"
+
+
+class CompliancePageFactory(BaseSectionFactory):
+    class Meta:
+        model = CompliancePage
+
+    title = "Compliance"
+    subtitle = "Our commitment to ethical and sustainable manufacturing practices"
+
+
+class SustainabilityPageFactory(BaseSectionFactory):
+    class Meta:
+        model = SustainabilityPage
+
+    title = "Sustainability"
+    subtitle = "Our initiatives for a greener and more sustainable future"
+
+
+class GalleryPageFactory(BaseSectionFactory):
+    class Meta:
+        model = GalleryPage
+
+    title = "Gallery"
+    subtitle = "Visual showcase of our facilities, products, and team"
+
+
+# Add these content factories
+class ProductCarouselSlideFactory(BaseFactory):
+    class Meta:
+        model = ProductCarouselSlide
+
+    page = factory.SubFactory(ProductsPageFactory)
+    image = factory.LazyAttribute(lambda x: cache_image(800, 600, keyword="fashion"))
+    alt = factory.Faker("sentence", nb_words=4)
+
+
+class ProductSectionFactory(BaseFactory):
+    class Meta:
+        model = ProductSection
+
+    page = factory.SubFactory(ProductsPageFactory)
+    title = factory.Faker("sentence", nb_words=4)
+    description = factory.Faker("paragraph", nb_sentences=5)
+    image = factory.LazyAttribute(lambda x: cache_image(600, 400, keyword="apparel"))
+    after_products = factory.Faker("boolean", chance_of_getting_true=20)
+
+
+class ProductCategoryFactory(BaseFactory):
+    class Meta:
+        model = ProductCategory
+
+    page = factory.SubFactory(ProductsPageFactory)
+    name = factory.Faker(
+        "random_element", elements=["Jackets", "Pants", "Shirts", "Denim", "Activewear"]
+    )
+
+
+class ProductFactory(BaseFactory):
+    class Meta:
+        model = Product
+
+    category = factory.SubFactory(ProductCategoryFactory)
+    gender = factory.Faker("random_element", elements=["Male", "Female"])
+    name = factory.Faker("sentence", nb_words=3)
+    image = factory.LazyAttribute(lambda x: cache_image(300, 300, keyword="clothing"))
+    buyer = factory.Faker("company")
+
+
+class ComplianceSectionFactory(BaseFactory):
+    class Meta:
+        model = ComplianceSection
+
+    page = factory.SubFactory(CompliancePageFactory)
+    title = factory.Faker("sentence", nb_words=4)
+    description = factory.Faker("paragraph", nb_sentences=10)
+    image = factory.LazyAttribute(lambda x: cache_image(600, 400, keyword="factory"))
+
+
+class ComplianceCertificateFactory(BaseFactory):
+    class Meta:
+        model = ComplianceCertificate
+
+    page = factory.SubFactory(CompliancePageFactory)
+    name = factory.Faker("company")
+    image = factory.LazyAttribute(
+        lambda x: cache_image(200, 200, keyword="certificate")
+    )
+
+
+class SustainabilitySectionFactory(BaseFactory):
+    class Meta:
+        model = SustainabilitySection
+
+    page = factory.SubFactory(SustainabilityPageFactory)
+    title = factory.Faker("sentence", nb_words=4)
+    description = factory.Faker("paragraph", nb_sentences=10)
+    image = factory.LazyAttribute(
+        lambda x: cache_image(600, 400, keyword="sustainable")
+    )
+
+
+class SustainabilityCertificateFactory(BaseFactory):
+    class Meta:
+        model = SustainabilityCertificate
+
+    page = factory.SubFactory(SustainabilityPageFactory)
+    name = factory.Faker("company")
+    image = factory.LazyAttribute(
+        lambda x: cache_image(200, 200, keyword="certificate")
+    )
+
+
+class GallerySectionFactory(BaseFactory):
+    class Meta:
+        model = GallerySection
+
+    page = factory.SubFactory(GalleryPageFactory)
+    name = factory.Faker(
+        "random_element", elements=["Products", "Factory", "Team", "Events"]
+    )
+
+
+class GalleryImageFactory(BaseFactory):
+    class Meta:
+        model = GalleryImage
+
+    section = factory.SubFactory(GallerySectionFactory)
+    caption = factory.Faker("sentence", nb_words=5)
+    image = factory.LazyAttribute(lambda x: cache_image(800, 600, keyword="factory"))
+
+
+class GalleryVideoFactory(BaseFactory):
+    class Meta:
+        model = GalleryVideo
+
+    section = factory.SubFactory(GallerySectionFactory)
+    caption = factory.Faker("sentence", nb_words=5)
+    youtube_url = factory.Faker(
+        "random_element",
+        elements=[
+            "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            "https://www.youtube.com/embed/8p2e_CIqkJo",
+            "https://www.youtube.com/embed/7NOSDKb0HlU",
+            "https://www.youtube.com/embed/L_LUpnjgPso",
+        ],
     )
