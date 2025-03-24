@@ -8,16 +8,16 @@
             <img src="{{ slide.image.url }}"
                  alt="{{ slide.title|default:'Slide Image' }}"
                  class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent">
-              <div class="absolute bottom-0 left-0 px-8 py-12 sm:p-16 w-full">
+            <div class="absolute inset-0">
+              <div class="absolute bottom-0 left-0 px-8 py-12 sm:p-16 w-full  bg-gradient-to-t from-black/80 to-transparent">
                 {% if slide.title or slide.subtitle %}
                   <div class="space-y-2 mb-6">
-                    {% if slide.title %}<h2 class="text-4xl font-bold text-foreground">{{ slide.title }}</h2>{% endif %}
-                    {% if slide.subtitle %}<p class="text-xl text-foreground/80">{{ slide.subtitle }}</p>{% endif %}
+                    {% if slide.title %}<h2 class="text-4xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{{ slide.title }}</h2>{% endif %}
+                    {% if slide.subtitle %}<p class="text-xl text-white/80 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{{ slide.subtitle }}</p>{% endif %}
                   </div>
                   {% if slide.cta_text %}
                     <a href="{{ slide.cta_url }}"
-                       class="inline-flex items-center px-6 py-3 text-sm text-primary font-bold bg-accent hover:bg-accent/90 rounded-lg transition">
+                       class="inline-flex items-center px-6 py-3 text-sm text-black font-bold bg-accent hover:bg-accent/90 rounded-lg transition">
                       {{ slide.cta_text }}
                     </a>
                   {% endif %}
@@ -25,7 +25,7 @@
                   {% if slide.cta %}
                     <div class="flex">
                       <a href="{{ slide.cta_url }}"
-                         class="inline-flex items-center px-8 py-4 text-lg text-primary font-bold bg-accent hover:bg-accent/90 rounded-full transition shadow-lg">
+                         class="inline-flex items-center px-8 py-4 text-lg text-black font-bold bg-accent hover:bg-accent/90 rounded-full transition shadow-lg">
                         {{ slide.cta_text }}
                       </a>
                     </div>
