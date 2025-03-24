@@ -13,7 +13,7 @@ class BaseSection(BaseModel):
         abstract = True
 
     def __str__(self):
-        return self.title
+        return self.title or f"{self.__class__.__name__} Section {self.id}"
 
 
 # --- --- Home Page Models --- ---
@@ -36,7 +36,7 @@ class HomeCarouselSlide(BaseModel):
     cta_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return self.title or f"Slide {self.id}"
 
 
 class HomeIntroductionSection(BaseSection):
