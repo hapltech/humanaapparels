@@ -86,6 +86,14 @@ class HomeCarouselSlideInline(BaseInline):
 class HomeHeroSectionAdmin(BaseModelAdmin):
     inlines = [HomeCarouselSlideInline]
 
+    def has_add_permission(self, request):
+        # Restrict adding new instances
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        # Restrict deleting the instance
+        return False
+
 
 @admin.register(HomeCarouselSlide)
 class HomeCarouselSlideAdmin(BaseModelAdmin):
@@ -118,6 +126,12 @@ class HomeIntroductionSectionAdmin(BaseSectionAdmin):
         ),
     )
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(HomeIntroductionFeature)
 class HomeIntroductionFeatureAdmin(BaseModelAdmin):
@@ -132,6 +146,12 @@ class ServiceInline(BaseInline):
 @admin.register(HomeServicesSection)
 class HomeServicesSectionAdmin(BaseSectionAdmin):
     inlines = [ServiceInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Service)
@@ -148,6 +168,12 @@ class CompanyStatsInline(BaseInline):
 @admin.register(HomeStatsSection)
 class HomeStatsSectionAdmin(BaseSectionAdmin):
     inlines = [CompanyStatsInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(CompanyStats)
@@ -175,6 +201,12 @@ class AboutSectionAdmin(BaseSectionAdmin):
         ),
     )
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 class TeamMemberInline(BaseInline):
     model = TeamMember
@@ -184,6 +216,12 @@ class TeamMemberInline(BaseInline):
 @admin.register(TeamSection)
 class TeamSectionAdmin(BaseSectionAdmin):
     inlines = [TeamMemberInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(TeamMember)
@@ -200,6 +238,12 @@ class FAQInline(BaseInline):
 @admin.register(FAQSection)
 class FAQSectionAdmin(BaseSectionAdmin):
     inlines = [FAQInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(FAQ)
@@ -219,6 +263,12 @@ class CustomerInline(BaseInline):
 class CustomersSectionAdmin(BaseSectionAdmin):
     inlines = [CustomerInline]
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(Customer)
 class CustomerAdmin(BaseModelAdmin):
@@ -235,6 +285,12 @@ class TestimonialInline(BaseInline):
 class TestimonialsSectionAdmin(BaseSectionAdmin):
     inlines = [TestimonialInline]
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(Testimonial)
 class TestimonialAdmin(BaseModelAdmin):
@@ -246,7 +302,11 @@ class TestimonialAdmin(BaseModelAdmin):
 # --- Contact Page Sections ---
 @admin.register(ContactSection)
 class ContactSectionAdmin(BaseSectionAdmin):
-    pass
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class ContactPhoneInline(BaseInline):
@@ -309,6 +369,12 @@ class CareerPositionInline(BaseInline):
 class CareerSectionAdmin(BaseSectionAdmin):
     inlines = [CareerPositionInline]
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(CareerPosition)
 class CareerPositionAdmin(BaseModelAdmin):
@@ -328,6 +394,12 @@ class NewsArticleInline(BaseInline):
 @admin.register(NewsSection)
 class NewsSectionAdmin(BaseSectionAdmin):
     inlines = [NewsArticleInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(NewsArticle)
@@ -356,6 +428,12 @@ class ProductCategoryInline(BaseInline):
 @admin.register(ProductsPage)
 class ProductsPageAdmin(BaseSectionAdmin):
     inlines = [ProductCarouselSlideInline, ProductSectionInline, ProductCategoryInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(ProductCarouselSlide)
@@ -405,6 +483,12 @@ class ComplianceCertificateInline(BaseInline):
 class CompliancePageAdmin(BaseSectionAdmin):
     inlines = [ComplianceSectionInline, ComplianceCertificateInline]
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(ComplianceSection)
 class ComplianceSectionAdmin(BaseModelAdmin):
@@ -435,6 +519,12 @@ class SustainabilityCertificateInline(BaseInline):
 class SustainabilityPageAdmin(BaseSectionAdmin):
     inlines = [SustainabilitySectionInline, SustainabilityCertificateInline]
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(SustainabilitySection)
 class SustainabilitySectionAdmin(BaseModelAdmin):
@@ -458,6 +548,12 @@ class GallerySectionInline(BaseInline):
 @admin.register(GalleryPage)
 class GalleryPageAdmin(BaseSectionAdmin):
     inlines = [GallerySectionInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class GalleryImageInline(BaseInline):
@@ -487,3 +583,11 @@ class GalleryImageAdmin(BaseModelAdmin):
 class GalleryVideoAdmin(BaseModelAdmin):
     list_display = ("caption", "section")
     list_filter = ("section",)
+
+
+def has_add_permission(self, request):
+    return False
+
+
+def has_delete_permission(self, request, obj=None):
+    return False

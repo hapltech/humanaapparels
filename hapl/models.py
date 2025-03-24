@@ -6,7 +6,7 @@ from common.fields import OptimizedImageField
 class BaseSection(BaseModel):
     """Abstract base model for content sections with title and subtitle"""
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, null=True, blank=True)
     subtitle = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
@@ -20,14 +20,15 @@ class BaseSection(BaseModel):
 class HomeHeroSection(BaseModel):
     """Section model for home page hero/carousel"""
 
-    pass
+    def __str__(self):
+        return f"Hero Section {self.id}"
 
 
 class HomeCarouselSlide(BaseModel):
     section = models.ForeignKey(
         HomeHeroSection, related_name="slides", on_delete=models.CASCADE, null=True
     )
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, null=True, blank=True)
     subtitle = models.CharField(max_length=500, blank=True, null=True)
     image = OptimizedImageField(upload_to="home/carousel/")
     is_active = models.BooleanField(default=True)
