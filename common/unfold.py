@@ -59,16 +59,25 @@ UNFOLD_CONFIG = {
                         "title": "Users",
                         "icon": "group",
                         "link": reverse_lazy("admin:users_user_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "users.view_user"
+                        ),
                     },
                     {
                         "title": "Departments",
                         "icon": "apartment",
                         "link": reverse_lazy("admin:users_department_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "users.view_department"
+                        ),
                     },
                     {
                         "title": "Roles",
                         "icon": "badge",
                         "link": reverse_lazy("admin:users_role_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "users.view_role"
+                        ),
                     },
                 ],
             },
@@ -82,48 +91,38 @@ UNFOLD_CONFIG = {
                         "title": "Hero Section",
                         "icon": "featured_video",
                         "link": reverse_lazy("admin:hapl_homeherosection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_homeherosection"
+                        ),
                     },
-                    # {
-                    #     "title": "Carousel Slides",
-                    #     "icon": "photo_library",
-                    #     "link": reverse_lazy("admin:hapl_homecarouselslide_changelist"),
-                    # },
                     {
                         "title": "Introduction Section",
                         "icon": "info",
                         "link": reverse_lazy(
                             "admin:hapl_homeintroductionsection_changelist"
                         ),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_homeintroductionsection"
+                        ),
                     },
-                    # {
-                    #     "title": "Introduction Features",
-                    #     "icon": "stars",
-                    #     "link": reverse_lazy(
-                    #         "admin:hapl_homeintroductionfeature_changelist"
-                    #     ),
-                    # },
                     {
                         "title": "Services Section",
                         "icon": "design_services",
                         "link": reverse_lazy(
                             "admin:hapl_homeservicessection_changelist"
                         ),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_homeservicessection"
+                        ),
                     },
-                    # {
-                    #     "title": "Services",
-                    #     "icon": "apparel",
-                    #     "link": reverse_lazy("admin:hapl_service_changelist"),
-                    # },
                     {
                         "title": "Stats Section",
                         "icon": "assessment",
                         "link": reverse_lazy("admin:hapl_homestatssection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_homestatssection"
+                        ),
                     },
-                    # {
-                    #     "title": "Company Stats",
-                    #     "icon": "leaderboard",
-                    #     "link": reverse_lazy("admin:hapl_companystats_changelist"),
-                    # },
                 ],
             },
             {
@@ -136,27 +135,26 @@ UNFOLD_CONFIG = {
                         "title": "About Section",
                         "icon": "description",
                         "link": reverse_lazy("admin:hapl_aboutsection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_aboutsection"
+                        ),
                     },
                     {
                         "title": "Team Section",
                         "icon": "diversity_3",
                         "link": reverse_lazy("admin:hapl_teamsection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_teamsection"
+                        ),
                     },
-                    # {
-                    #     "title": "Team Members",
-                    #     "icon": "groups",
-                    #     "link": reverse_lazy("admin:hapl_teammember_changelist"),
-                    # },
                     {
                         "title": "FAQ Section",
                         "icon": "quiz",
                         "link": reverse_lazy("admin:hapl_faqsection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_faqsection"
+                        ),
                     },
-                    # {
-                    #     "title": "FAQs",
-                    #     "icon": "help",
-                    #     "link": reverse_lazy("admin:hapl_faq_changelist"),
-                    # },
                 ],
             },
             {
@@ -169,24 +167,20 @@ UNFOLD_CONFIG = {
                         "title": "Customers Section",
                         "icon": "business",
                         "link": reverse_lazy("admin:hapl_customerssection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_customerssection"
+                        ),
                     },
-                    # {
-                    #     "title": "Customers",
-                    #     "icon": "store",
-                    #     "link": reverse_lazy("admin:hapl_customer_changelist"),
-                    # },
                     {
                         "title": "Testimonials Section",
                         "icon": "forum",
                         "link": reverse_lazy(
                             "admin:hapl_testimonialssection_changelist"
                         ),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_testimonialssection"
+                        ),
                     },
-                    # {
-                    #     "title": "Testimonials",
-                    #     "icon": "comment",
-                    #     "link": reverse_lazy("admin:hapl_testimonial_changelist"),
-                    # },
                 ],
             },
             {
@@ -199,36 +193,33 @@ UNFOLD_CONFIG = {
                         "title": "Contact Section",
                         "icon": "contact_mail",
                         "link": reverse_lazy("admin:hapl_contactsection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_contactsection"
+                        ),
                     },
                     {
                         "title": "Contact Data",
                         "icon": "location_on",
                         "link": reverse_lazy("admin:hapl_contactdata_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_contactdata"
+                        ),
                     },
-                    # {
-                    #     "title": "Phone Numbers",
-                    #     "icon": "phone",
-                    #     "link": reverse_lazy("admin:hapl_contactphone_changelist"),
-                    # },
-                    # {
-                    #     "title": "Email Addresses",
-                    #     "icon": "email",
-                    #     "link": reverse_lazy("admin:hapl_contactemail_changelist"),
-                    # },
                     {
                         "title": "Contact Groups",
                         "icon": "group_work",
                         "link": reverse_lazy("admin:hapl_contactgroup_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_contactgroup"
+                        ),
                     },
-                    # {
-                    #     "title": "Contact Members",
-                    #     "icon": "contacts",
-                    #     "link": reverse_lazy("admin:hapl_contactmember_changelist"),
-                    # },
                     {
                         "title": "Social Links",
                         "icon": "share",
                         "link": reverse_lazy("admin:hapl_social_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_social"
+                        ),
                     },
                 ],
             },
@@ -242,11 +233,17 @@ UNFOLD_CONFIG = {
                         "title": "Career Section",
                         "icon": "business_center",
                         "link": reverse_lazy("admin:hapl_careersection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_careersection"
+                        ),
                     },
                     {
                         "title": "Career Positions",
                         "icon": "work_outline",
                         "link": reverse_lazy("admin:hapl_careerposition_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_careerposition"
+                        ),
                     },
                 ],
             },
@@ -260,11 +257,17 @@ UNFOLD_CONFIG = {
                         "title": "News Section",
                         "icon": "newspaper",
                         "link": reverse_lazy("admin:hapl_newssection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_newssection"
+                        ),
                     },
                     {
                         "title": "News Articles",
                         "icon": "feed",
                         "link": reverse_lazy("admin:hapl_newsarticle_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_newsarticle"
+                        ),
                     },
                 ],
             },
@@ -278,16 +281,25 @@ UNFOLD_CONFIG = {
                         "title": "Products Page",
                         "icon": "checkroom",
                         "link": reverse_lazy("admin:hapl_productspage_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_productspage"
+                        ),
                     },
                     {
                         "title": "Product Categories",
                         "icon": "category",
                         "link": reverse_lazy("admin:hapl_productcategory_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_productcategory"
+                        ),
                     },
                     {
                         "title": "Products",
                         "icon": "inventory",
                         "link": reverse_lazy("admin:hapl_product_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_product"
+                        ),
                     },
                 ],
             },
@@ -301,17 +313,26 @@ UNFOLD_CONFIG = {
                         "title": "Compliance Page",
                         "icon": "verified",
                         "link": reverse_lazy("admin:hapl_compliancepage_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_compliancepage"
+                        ),
                     },
                     {
                         "title": "Compliance Sections",
                         "icon": "rule",
                         "link": reverse_lazy("admin:hapl_compliancesection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_compliancesection"
+                        ),
                     },
                     {
                         "title": "Certificates",
                         "icon": "verified_user",
                         "link": reverse_lazy(
                             "admin:hapl_compliancecertificate_changelist"
+                        ),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_compliancecertificate"
                         ),
                     },
                 ],
@@ -328,6 +349,9 @@ UNFOLD_CONFIG = {
                         "link": reverse_lazy(
                             "admin:hapl_sustainabilitypage_changelist"
                         ),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_sustainabilitypage"
+                        ),
                     },
                     {
                         "title": "Sustainability Sections",
@@ -335,12 +359,18 @@ UNFOLD_CONFIG = {
                         "link": reverse_lazy(
                             "admin:hapl_sustainabilitysection_changelist"
                         ),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_sustainabilitysection"
+                        ),
                     },
                     {
                         "title": "Certificates",
                         "icon": "recycling",
                         "link": reverse_lazy(
                             "admin:hapl_sustainabilitycertificate_changelist"
+                        ),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_sustainabilitycertificate"
                         ),
                     },
                 ],
@@ -355,21 +385,33 @@ UNFOLD_CONFIG = {
                         "title": "Gallery Page",
                         "icon": "photo_library",
                         "link": reverse_lazy("admin:hapl_gallerypage_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_gallerypage"
+                        ),
                     },
                     {
                         "title": "Gallery Sections",
                         "icon": "folder",
                         "link": reverse_lazy("admin:hapl_gallerysection_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_gallerysection"
+                        ),
                     },
                     {
                         "title": "Images",
                         "icon": "image",
                         "link": reverse_lazy("admin:hapl_galleryimage_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_galleryimage"
+                        ),
                     },
                     {
                         "title": "Videos",
                         "icon": "videocam",
                         "link": reverse_lazy("admin:hapl_galleryvideo_changelist"),
+                        "permission": lambda request: request.user.has_perm(
+                            "hapl.view_galleryvideo"
+                        ),
                     },
                 ],
             },
