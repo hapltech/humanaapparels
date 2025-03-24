@@ -10,7 +10,7 @@ urlpatterns = [
     path("news/<str:article_id>/", views.article, name="article"),
     path("career/", views.career, name="career"),
     path("products/", views.products, name="products"),
-    path("complience/", views.complience, name="complience"),
+    path("compliance/", views.complience, name="complience"),
     path("sustainability/", views.sustainability, name="sustainability"),
     path("gallery/", views.gallery, name="gallery"),
 ]

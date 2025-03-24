@@ -54,12 +54,10 @@
         </section>
       {% endif %}
     {% endfor %}
-    
     <!-- Product Portfolio Section -->
     <div class="pt-16 mb-12 text-4xl font-bold flex items-center before:flex-1 before:border-t before:border-border before:me-6 after:flex-1 after:border-t after:border-border after:ms-6">
       Product Portfolio
     </div>
-    
     <!-- Accordion for Product Portfolio -->
     <div class="w-full bg-card rounded-lg shadow-md mb-16">
       <div class="hs-accordion-group">
@@ -77,91 +75,30 @@
                  class="hs-accordion-content {% if forloop.first %}w-full{% else %}hidden{% endif %} overflow-hidden transition-[height] duration-300"
                  aria-labelledby="section-{{ forloop.counter }}">
               <div class="px-6 pb-6">
-                <!-- Filter products by gender -->
-                {% with current_section=portfolio_section %}
-                  <!-- Check if we have both male and female products -->
-                  {% with has_male=False has_female=False %}
-                    {% for product in current_section.products %}
-                      {% if product.gender == "Male" %}
-                        {% with has_male=True %}{% endwith %}
-                      {% elif product.gender == "Female" %}
-                        {% with has_female=True %}{% endwith %}
-                      {% endif %}
-                    {% endfor %}
-                    <!-- Nested Accordion for Gender -->
-                    <div class="hs-accordion-group pl-4 mt-2">
-                      <!-- Male Products -->
-                      {% if has_male %}
-                        <div class="hs-accordion active"
-                             id="gender-male-{{ forloop.parentloop.counter }}">
-                          <button class="hs-accordion-toggle hs-accordion-active:text-primary px-4 py-3 inline-flex items-center gap-x-2 text-sm w-full font-semibold text-start text-foreground hover:text-foreground/90 focus:outline-none rounded-lg"
-                                  aria-expanded="true"
-                                  aria-controls="gender-male-collapse-{{ forloop.parentloop.counter }}">
-                            <i class="hs-accordion-active:hidden hs-accordion-active:text-primary block text-foreground ph ph-duotone ph-plus size-3"></i>
-                            <i class="hs-accordion-active:block hs-accordion-active:text-primary hidden text-foreground ph ph-duotone ph-minus size-3"></i>
-                            Men's Products
-                          </button>
-                          <div id="gender-male-collapse-{{ forloop.parentloop.counter }}"
-                               class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
-                               aria-labelledby="gender-male-{{ forloop.parentloop.counter }}">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-                              {% for product in current_section.products %}
-                                {% if product.gender == "Male" %}
-                                  <div class="bg-card hover:bg-card/90 border border-border/20 rounded-lg shadow-sm hover:shadow transition-all duration-300 overflow-hidden">
-                                    <img src="{{ product.image }}"
-                                         alt="{{ product.name }}"
-                                         class="w-full h-48 object-cover">
-                                    <div class="p-4">
-                                      <h3 class="font-medium text-foreground">{{ product.name }}</h3>
-                                      <p class="text-sm text-foreground/60">Buyer: {{ product.buyer }}</p>
-                                    </div>
-                                  </div>
-                                {% endif %}
-                              {% endfor %}
-                            </div>
-                          </div>
-                        </div>
-                      {% endif %}
-                      <!-- Female Products -->
-                      {% if has_female %}
-                        <div class="hs-accordion {% if not has_male %}active{% endif %}"
-                             id="gender-female-{{ forloop.parentloop.counter }}">
-                          <button class="hs-accordion-toggle hs-accordion-active:text-primary px-4 py-3 inline-flex items-center gap-x-2 text-sm w-full font-semibold text-start text-foreground hover:text-foreground/90 focus:outline-none rounded-lg"
-                                  aria-expanded="{% if not has_male %}true{% else %}false{% endif %}"
-                                  aria-controls="gender-female-collapse-{{ forloop.parentloop.counter }}">
-                            <i class="hs-accordion-active:hidden hs-accordion-active:text-primary block text-foreground ph ph-duotone ph-plus size-3"></i>
-                            <i class="hs-accordion-active:block hs-accordion-active:text-primary hidden text-foreground ph ph-duotone ph-minus size-3"></i>
-                            Women's Products
-                          </button>
-                          <div id="gender-female-collapse-{{ forloop.parentloop.counter }}"
-                               class="hs-accordion-content {% if not has_male %}w-full{% else %}hidden{% endif %} overflow-hidden transition-[height] duration-300"
-                               aria-labelledby="gender-female-{{ forloop.parentloop.counter }}">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-                              {% for product in current_section.products %}
-                                {% if product.gender == "Female" %}
-                                  <div class="bg-card hover:bg-card/90 border border-border/20 rounded-lg shadow-sm hover:shadow transition-all duration-300 overflow-hidden">
-                                    <img src="{{ product.image }}"
-                                         alt="{{ product.name }}"
-                                         class="w-full h-48 object-cover">
-                                    <div class="p-4">
-                                      <h3 class="font-medium text-foreground">{{ product.name }}</h3>
-                                      <p class="text-sm text-foreground/60">Buyer: {{ product.buyer }}</p>
-                                    </div>
-                                  </div>
-                                {% endif %}
-                              {% endfor %}
-                            </div>
-                          </div>
-                        </div>
-                      {% endif %}
-                      <!-- If no gender-specific products are found -->
-                      {% if not has_male and not has_female %}
+                <!-- Nested Accordion for Gender - only if we have gender-specific products -->
+                <div class="hs-accordion-group pl-4 mt-2">
+                  <!-- Male Products -->
+                  {% if portfolio_section.has_male %}
+                    <div class="hs-accordion active"
+                         id="gender-male-{{ forloop.counter }}">
+                      <button class="hs-accordion-toggle hs-accordion-active:text-primary px-4 py-3 inline-flex items-center gap-x-2 text-sm w-full font-semibold text-start text-foreground hover:text-foreground/90 focus:outline-none rounded-lg"
+                              aria-expanded="true"
+                              aria-controls="gender-male-collapse-{{ forloop.counter }}">
+                        <i class="hs-accordion-active:hidden hs-accordion-active:text-primary block text-foreground ph ph-duotone ph-plus size-3"></i>
+                        <i class="hs-accordion-active:block hs-accordion-active:text-primary hidden text-foreground ph ph-duotone ph-minus size-3"></i>
+                        Men's Products
+                      </button>
+                      <div id="gender-male-collapse-{{ forloop.counter }}"
+                           class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                           aria-labelledby="gender-male-{{ forloop.counter }}">
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-                          {% for product in current_section.products %}
+                          {% for product in portfolio_section.male_products %}
                             <div class="bg-card hover:bg-card/90 border border-border/20 rounded-lg shadow-sm hover:shadow transition-all duration-300 overflow-hidden">
-                              <img src="{{ product.image }}"
-                                   alt="{{ product.name }}"
-                                   class="w-full aspect-square object-cover">
+                              <div class="bg-white">
+                                <img src="{{ product.image }}"
+                                     alt="{{ product.name }}"
+                                     class="w-full aspect-square object-contain">
+                              </div>
                               <div class="p-4">
                                 <h3 class="font-medium text-foreground">{{ product.name }}</h3>
                                 <p class="text-sm text-foreground/60">Buyer: {{ product.buyer }}</p>
@@ -169,17 +106,80 @@
                             </div>
                           {% endfor %}
                         </div>
-                      {% endif %}
+                      </div>
                     </div>
-                  {% endwith %}
-                {% endwith %}
+                  {% endif %}
+                  
+                  <!-- Female Products -->
+                  {% if portfolio_section.has_female %}
+                    <div class="hs-accordion {% if not portfolio_section.has_male %}active{% endif %}"
+                         id="gender-female-{{ forloop.counter }}">
+                      <button class="hs-accordion-toggle hs-accordion-active:text-primary px-4 py-3 inline-flex items-center gap-x-2 text-sm w-full font-semibold text-start text-foreground hover:text-foreground/90 focus:outline-none rounded-lg"
+                              aria-expanded="{% if not portfolio_section.has_male %}true{% else %}false{% endif %}"
+                              aria-controls="gender-female-collapse-{{ forloop.counter }}">
+                        <i class="hs-accordion-active:hidden hs-accordion-active:text-primary block text-foreground ph ph-duotone ph-plus size-3"></i>
+                        <i class="hs-accordion-active:block hs-accordion-active:text-primary hidden text-foreground ph ph-duotone ph-minus size-3"></i>
+                        Women's Products
+                      </button>
+                      <div id="gender-female-collapse-{{ forloop.counter }}"
+                           class="hs-accordion-content {% if not portfolio_section.has_male %}w-full{% else %}hidden{% endif %} overflow-hidden transition-[height] duration-300"
+                           aria-labelledby="gender-female-{{ forloop.counter }}">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                          {% for product in portfolio_section.female_products %}
+                            <div class="bg-card hover:bg-card/90 border border-border/20 rounded-lg shadow-sm hover:shadow transition-all duration-300 overflow-hidden">
+                              <div class="bg-white">
+                                <img src="{{ product.image }}"
+                                     alt="{{ product.name }}"
+                                     class="w-full aspect-square object-contain">
+                              </div>
+                              <div class="p-4">
+                                <h3 class="font-medium text-foreground">{{ product.name }}</h3>
+                                <p class="text-sm text-foreground/60">Buyer: {{ product.buyer }}</p>
+                              </div>
+                            </div>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  
+                  <!-- Other/Ungrouped Products -->
+                  {% if portfolio_section.has_other %}
+                    <div class="{% if portfolio_section.has_male or portfolio_section.has_female %}mt-4{% endif %}">
+                      {% if portfolio_section.has_male or portfolio_section.has_female %}
+                        <h3 class="font-medium text-foreground mb-2 px-4">Other Products</h3>
+                      {% endif %}
+                      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                        {% for product in portfolio_section.other_products %}
+                          <div class="bg-card hover:bg-card/90 border border-border/20 rounded-lg shadow-sm hover:shadow transition-all duration-300 overflow-hidden">
+                            <div class="bg-white">
+                              <img src="{{ product.image }}"
+                                   alt="{{ product.name }}"
+                                   class="w-full aspect-square object-contain">
+                            </div>
+                            <div class="p-4">
+                              <h3 class="font-medium text-foreground">{{ product.name }}</h3>
+                              <p class="text-sm text-foreground/60">Buyer: {{ product.buyer }}</p>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endif %}
+                  
+                  <!-- If no products at all, show a message -->
+                  {% if not portfolio_section.has_male and not portfolio_section.has_female and not portfolio_section.has_other %}
+                    <div class="p-4 text-center">
+                      <p class="text-foreground/60">No products available in this category.</p>
+                    </div>
+                  {% endif %}
+                </div>
               </div>
             </div>
           </div>
         {% endfor %}
       </div>
     </div>
-    
     <!-- Text + Image Sections (Stacked) AFTER product portfolio -->
     {% for section in sections %}
       {% if section.after_products %}

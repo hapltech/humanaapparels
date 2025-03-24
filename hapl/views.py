@@ -284,19 +284,35 @@ def products(request):
         "product_portfolio": [],
     }
 
-    # Build the product portfolio structure
+    # Build the product portfolio structure with pre-processed gender data
     for category in ProductCategory.objects.filter(page=products_page):
-        portfolio_item = {"section": category.name, "products": []}
+        portfolio_item = {
+            "section": category.name,
+            "has_male": False,
+            "has_female": False,
+            "has_other": False,
+            "male_products": [],
+            "female_products": [],
+            "other_products": [],
+        }
 
+        # Categorize products by gender
         for product in Product.objects.filter(category=category):
-            portfolio_item["products"].append(
-                {
-                    "gender": product.gender,
-                    "name": product.name,
-                    "image": product.image.url,
-                    "buyer": product.buyer,
-                }
-            )
+            product_data = {
+                "name": product.name,
+                "image": product.image.url,
+                "buyer": product.buyer,
+            }
+
+            if product.gender == "Male":
+                portfolio_item["has_male"] = True
+                portfolio_item["male_products"].append(product_data)
+            elif product.gender == "Female":
+                portfolio_item["has_female"] = True
+                portfolio_item["female_products"].append(product_data)
+            else:
+                portfolio_item["has_other"] = True
+                portfolio_item["other_products"].append(product_data)
 
         context["product_portfolio"].append(portfolio_item)
 
