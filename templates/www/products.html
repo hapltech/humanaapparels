@@ -36,26 +36,30 @@
     </div>
   </div>
   <div class="max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    <!-- Text + Image Sections (Stacked) -->
+    <!-- Text + Image Sections (Stacked) BEFORE product portfolio -->
     {% for section in sections %}
-      <section class="mb-20 pb-8">
-        <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <h2 class="text-2xl font-bold mb-6 pb-2 relative after:content-[''] after:absolute after:w-full after:h-1 after:bg-gradient-to-r after:from-primary after:to-accent after:bottom-0 after:left-0 transition-all duration-300 hover:after:h-2">
-            {{ section.title }}
-          </h2>
-          <p class="text-foreground/80 leading-relaxed mb-10">{{ section.description }}</p>
-          <div class="w-full max-w-2xl">
-            <img src="{{ section.image }}"
-                 alt="{{ section.title }}"
-                 class="w-full h-auto rounded-3xl object-cover shadow-md hover:shadow-lg transition-shadow duration-300">
+      {% if not section.after_products %}
+        <section class="mb-20 pb-8">
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 pb-2 relative after:content-[''] after:absolute after:w-full after:h-1 after:bg-gradient-to-r after:from-primary after:to-accent after:bottom-0 after:left-0 transition-all duration-300 hover:after:h-2">
+              {{ section.title }}
+            </h2>
+            <p class="text-foreground/80 leading-relaxed mb-10">{{ section.description }}</p>
+            <div class="w-full max-w-2xl">
+              <img src="{{ section.image }}"
+                   alt="{{ section.title }}"
+                   class="w-full h-auto rounded-3xl object-cover shadow-md hover:shadow-lg transition-shadow duration-300">
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      {% endif %}
     {% endfor %}
+    
     <!-- Product Portfolio Section -->
     <div class="pt-16 mb-12 text-4xl font-bold flex items-center before:flex-1 before:border-t before:border-border before:me-6 after:flex-1 after:border-t after:border-border after:ms-6">
       Product Portfolio
     </div>
+    
     <!-- Accordion for Product Portfolio -->
     <div class="w-full bg-card rounded-lg shadow-md mb-16">
       <div class="hs-accordion-group">
@@ -175,5 +179,24 @@
         {% endfor %}
       </div>
     </div>
+    
+    <!-- Text + Image Sections (Stacked) AFTER product portfolio -->
+    {% for section in sections %}
+      {% if section.after_products %}
+        <section class="mt-16 mb-20 pb-8">
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 pb-2 relative after:content-[''] after:absolute after:w-full after:h-1 after:bg-gradient-to-r after:from-primary after:to-accent after:bottom-0 after:left-0 transition-all duration-300 hover:after:h-2">
+              {{ section.title }}
+            </h2>
+            <p class="text-foreground/80 leading-relaxed mb-10">{{ section.description }}</p>
+            <div class="w-full max-w-2xl">
+              <img src="{{ section.image }}"
+                   alt="{{ section.title }}"
+                   class="w-full h-auto rounded-3xl object-cover shadow-md hover:shadow-lg transition-shadow duration-300">
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    {% endfor %}
   </div>
 {% endblock %}

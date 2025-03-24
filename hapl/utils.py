@@ -18,6 +18,7 @@ def generate_products_data():
                 "title": fake.sentence(nb_words=4),
                 "description": fake.paragraph(nb_sentences=5),
                 "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/600/400",
+                "after_products": fake.boolean(chance_of_getting_true=20),
             }
             for _ in range(5)
         ],
@@ -74,9 +75,24 @@ def generate_sustainability_data():
         "certificates": [
             {
                 "name": fake.company(),
-                "image": f"https://picsum.photos/seed/{fake.lexify(text='???????????')}/200",
-            }
-            for _ in range(10)
+                "image": "https://explore-bd.com/wp-content/uploads/2024/12/8.png",
+            },
+            {
+                "name": fake.company(),
+                "image": "https://explore-bd.com/wp-content/uploads/2024/12/4-.jpg",
+            },
+            {
+                "name": fake.company(),
+                "image": "https://explore-bd.com/wp-content/uploads/2024/12/2.png",
+            },
+            {
+                "name": fake.company(),
+                "image": "https://explore-bd.com/wp-content/uploads/2024/12/5-.png",
+            },
+            {
+                "name": fake.company(),
+                "image": "https://explore-bd.com/wp-content/uploads/2024/12/1-1.png",
+            },
         ],
     }
     return sustainability_data
@@ -92,7 +108,7 @@ def generate_gallery_data():
                     elements=("Product", "Culture", "Team", "Events")
                 ),
             }
-            for _ in range(20)
+            for _ in range(50)
         ],
         "videos": [
             {
