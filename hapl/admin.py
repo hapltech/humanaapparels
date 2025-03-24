@@ -31,6 +31,21 @@ from hapl.models import (
     Social,
     CareerPosition,
     NewsArticle,
+    ProductsPage,
+    ProductCarouselSlide,
+    ProductSection,
+    ProductCategory,
+    Product,
+    CompliancePage,
+    ComplianceSection,
+    ComplianceCertificate,
+    SustainabilityPage,
+    SustainabilitySection,
+    SustainabilityCertificate,
+    GalleryPage,
+    GallerySection,
+    GalleryImage,
+    GalleryVideo,
 )
 
 
@@ -64,11 +79,11 @@ class BaseSectionAdmin(BaseModelAdmin):
 
 class HomeCarouselSlideInline(BaseInline):
     model = HomeCarouselSlide
-    extra = 1
+    extra = 0
 
 
 @admin.register(HomeHeroSection)
-class HomeHeroSectionAdmin(BaseSectionAdmin):
+class HomeHeroSectionAdmin(BaseModelAdmin):
     inlines = [HomeCarouselSlideInline]
 
 
@@ -80,7 +95,7 @@ class HomeCarouselSlideAdmin(BaseModelAdmin):
 
 class HomeIntroductionFeatureInline(BaseInline):
     model = HomeIntroductionFeature
-    extra = 1
+    extra = 0
 
 
 @admin.register(HomeIntroductionSection)
@@ -111,7 +126,7 @@ class HomeIntroductionFeatureAdmin(BaseModelAdmin):
 
 class ServiceInline(BaseInline):
     model = Service
-    extra = 1
+    extra = 0
 
 
 @admin.register(HomeServicesSection)
@@ -127,7 +142,7 @@ class ServiceAdmin(BaseModelAdmin):
 
 class CompanyStatsInline(BaseInline):
     model = CompanyStats
-    extra = 1
+    extra = 0
 
 
 @admin.register(HomeStatsSection)
@@ -163,7 +178,7 @@ class AboutSectionAdmin(BaseSectionAdmin):
 
 class TeamMemberInline(BaseInline):
     model = TeamMember
-    extra = 1
+    extra = 0
 
 
 @admin.register(TeamSection)
@@ -179,7 +194,7 @@ class TeamMemberAdmin(BaseModelAdmin):
 
 class FAQInline(BaseInline):
     model = FAQ
-    extra = 1
+    extra = 0
 
 
 @admin.register(FAQSection)
@@ -197,7 +212,7 @@ class FAQAdmin(BaseModelAdmin):
 
 class CustomerInline(BaseInline):
     model = Customer
-    extra = 1
+    extra = 0
 
 
 @admin.register(CustomersSection)
@@ -213,7 +228,7 @@ class CustomerAdmin(BaseModelAdmin):
 
 class TestimonialInline(BaseInline):
     model = Testimonial
-    extra = 1
+    extra = 0
 
 
 @admin.register(TestimonialsSection)
@@ -236,12 +251,12 @@ class ContactSectionAdmin(BaseSectionAdmin):
 
 class ContactPhoneInline(BaseInline):
     model = ContactPhone
-    extra = 1
+    extra = 0
 
 
 class ContactEmailInline(BaseInline):
     model = ContactEmail
-    extra = 1
+    extra = 0
 
 
 @admin.register(ContactData)
@@ -263,7 +278,7 @@ class ContactEmailAdmin(BaseModelAdmin):
 
 class ContactMemberInline(BaseInline):
     model = ContactMember
-    extra = 1
+    extra = 0
 
 
 @admin.register(ContactGroup)
@@ -287,7 +302,7 @@ class SocialAdmin(BaseModelAdmin):
 
 class CareerPositionInline(BaseInline):
     model = CareerPosition
-    extra = 1
+    extra = 0
 
 
 @admin.register(CareerSection)
@@ -307,7 +322,7 @@ class CareerPositionAdmin(BaseModelAdmin):
 
 class NewsArticleInline(BaseInline):
     model = NewsArticle
-    extra = 1
+    extra = 0
 
 
 @admin.register(NewsSection)
@@ -320,3 +335,155 @@ class NewsArticleAdmin(BaseModelAdmin):
     list_display = ("title", "published_at", "category", "is_featured")
     list_filter = ("category", "is_featured", "published_at")
     formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+class ProductCarouselSlideInline(BaseInline):
+    model = ProductCarouselSlide
+    extra = 1
+
+
+class ProductSectionInline(BaseInline):
+    model = ProductSection
+    extra = 1
+    formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+class ProductCategoryInline(BaseInline):
+    model = ProductCategory
+    extra = 1
+
+
+@admin.register(ProductsPage)
+class ProductsPageAdmin(BaseSectionAdmin):
+    inlines = [ProductCarouselSlideInline, ProductSectionInline, ProductCategoryInline]
+
+
+@admin.register(ProductCarouselSlide)
+class ProductCarouselSlideAdmin(BaseModelAdmin):
+    list_display = ("alt", "page")
+    list_filter = ("page",)
+
+
+@admin.register(ProductSection)
+class ProductSectionAdmin(BaseModelAdmin):
+    list_display = ("title", "page", "after_products")
+    list_filter = ("page", "after_products")
+    formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+class ProductInline(BaseInline):
+    model = Product
+    extra = 1
+
+
+@admin.register(ProductCategory)
+class ProductCategoryAdmin(BaseModelAdmin):
+    list_display = ("name", "page")
+    list_filter = ("page",)
+    inlines = [ProductInline]
+
+
+@admin.register(Product)
+class ProductAdmin(BaseModelAdmin):
+    list_display = ("name", "category", "gender", "buyer")
+    list_filter = ("category", "gender")
+
+
+# --- Compliance Page Sections ---
+class ComplianceSectionInline(BaseInline):
+    model = ComplianceSection
+    extra = 1
+    formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+class ComplianceCertificateInline(BaseInline):
+    model = ComplianceCertificate
+    extra = 1
+
+
+@admin.register(CompliancePage)
+class CompliancePageAdmin(BaseSectionAdmin):
+    inlines = [ComplianceSectionInline, ComplianceCertificateInline]
+
+
+@admin.register(ComplianceSection)
+class ComplianceSectionAdmin(BaseModelAdmin):
+    list_display = ("title", "page")
+    list_filter = ("page",)
+    formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+@admin.register(ComplianceCertificate)
+class ComplianceCertificateAdmin(BaseModelAdmin):
+    list_display = ("name", "page")
+    list_filter = ("page",)
+
+
+# --- Sustainability Page Sections ---
+class SustainabilitySectionInline(BaseInline):
+    model = SustainabilitySection
+    extra = 1
+    formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+class SustainabilityCertificateInline(BaseInline):
+    model = SustainabilityCertificate
+    extra = 1
+
+
+@admin.register(SustainabilityPage)
+class SustainabilityPageAdmin(BaseSectionAdmin):
+    inlines = [SustainabilitySectionInline, SustainabilityCertificateInline]
+
+
+@admin.register(SustainabilitySection)
+class SustainabilitySectionAdmin(BaseModelAdmin):
+    list_display = ("title", "page")
+    list_filter = ("page",)
+    formfield_overrides = {models.TextField: {"widget": WysiwygWidget}}
+
+
+@admin.register(SustainabilityCertificate)
+class SustainabilityCertificateAdmin(BaseModelAdmin):
+    list_display = ("name", "page")
+    list_filter = ("page",)
+
+
+# --- Gallery Page Sections ---
+class GallerySectionInline(BaseInline):
+    model = GallerySection
+    extra = 1
+
+
+@admin.register(GalleryPage)
+class GalleryPageAdmin(BaseSectionAdmin):
+    inlines = [GallerySectionInline]
+
+
+class GalleryImageInline(BaseInline):
+    model = GalleryImage
+    extra = 1
+
+
+class GalleryVideoInline(BaseInline):
+    model = GalleryVideo
+    extra = 1
+
+
+@admin.register(GallerySection)
+class GallerySectionAdmin(BaseModelAdmin):
+    list_display = ("name", "page")
+    list_filter = ("page",)
+    inlines = [GalleryImageInline, GalleryVideoInline]
+
+
+@admin.register(GalleryImage)
+class GalleryImageAdmin(BaseModelAdmin):
+    list_display = ("caption", "section")
+    list_filter = ("section",)
+
+
+@admin.register(GalleryVideo)
+class GalleryVideoAdmin(BaseModelAdmin):
+    list_display = ("caption", "section")
+    list_filter = ("section",)

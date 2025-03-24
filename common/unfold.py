@@ -268,6 +268,111 @@ UNFOLD_CONFIG = {
                     },
                 ],
             },
+            {
+                "title": "Products Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "inventory_2",
+                "items": [
+                    {
+                        "title": "Products Page",
+                        "icon": "checkroom",
+                        "link": reverse_lazy("admin:hapl_productspage_changelist"),
+                    },
+                    {
+                        "title": "Product Categories",
+                        "icon": "category",
+                        "link": reverse_lazy("admin:hapl_productcategory_changelist"),
+                    },
+                    {
+                        "title": "Products",
+                        "icon": "inventory",
+                        "link": reverse_lazy("admin:hapl_product_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Compliance Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "policy",
+                "items": [
+                    {
+                        "title": "Compliance Page",
+                        "icon": "verified",
+                        "link": reverse_lazy("admin:hapl_compliancepage_changelist"),
+                    },
+                    {
+                        "title": "Compliance Sections",
+                        "icon": "rule",
+                        "link": reverse_lazy("admin:hapl_compliancesection_changelist"),
+                    },
+                    {
+                        "title": "Certificates",
+                        "icon": "verified_user",
+                        "link": reverse_lazy(
+                            "admin:hapl_compliancecertificate_changelist"
+                        ),
+                    },
+                ],
+            },
+            {
+                "title": "Sustainability Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "eco",
+                "items": [
+                    {
+                        "title": "Sustainability Page",
+                        "icon": "park",
+                        "link": reverse_lazy(
+                            "admin:hapl_sustainabilitypage_changelist"
+                        ),
+                    },
+                    {
+                        "title": "Sustainability Sections",
+                        "icon": "nature",
+                        "link": reverse_lazy(
+                            "admin:hapl_sustainabilitysection_changelist"
+                        ),
+                    },
+                    {
+                        "title": "Certificates",
+                        "icon": "recycling",
+                        "link": reverse_lazy(
+                            "admin:hapl_sustainabilitycertificate_changelist"
+                        ),
+                    },
+                ],
+            },
+            {
+                "title": "Gallery Page",
+                "separator": True,
+                "collapsible": True,
+                "icon": "collections",
+                "items": [
+                    {
+                        "title": "Gallery Page",
+                        "icon": "photo_library",
+                        "link": reverse_lazy("admin:hapl_gallerypage_changelist"),
+                    },
+                    {
+                        "title": "Gallery Sections",
+                        "icon": "folder",
+                        "link": reverse_lazy("admin:hapl_gallerysection_changelist"),
+                    },
+                    {
+                        "title": "Images",
+                        "icon": "image",
+                        "link": reverse_lazy("admin:hapl_galleryimage_changelist"),
+                    },
+                    {
+                        "title": "Videos",
+                        "icon": "videocam",
+                        "link": reverse_lazy("admin:hapl_galleryvideo_changelist"),
+                    },
+                ],
+            },
         ],
     },
 }
